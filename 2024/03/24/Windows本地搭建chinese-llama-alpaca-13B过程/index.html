@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/gina511.github.io/img/favicon.png">
+  
+  
+      <meta name="author" content="Gina">
+  
+  
+  
+  
+  
+    <link rel="alternate" href="/gina511.github.io/atom.xml " title="Gina" type="application/atom+xml">
+  
+
+  
+
+  <title>本地llama.cpp搭建中文llama-alpaca-13B模型记录 | Gina</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/gina511.github.io/css/style.css" >
+  <link rel="stylesheet" href="/gina511.github.io/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/gina511.github.io/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/gina511.github.io/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/gina511.github.io/" title="Gina">Gina</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/search/ ">
+                            <i class=" fas fa-search-plus " style="color: rgb(3 169 244);"></i>
+                            <span class="layui-nav-item-name">Search</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/ ">
+                            <i class=" fab fa-fort-awesome " style="color: rgb(255 107 107);"></i>
+                            <span class="layui-nav-item-name">Home</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">Archives</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="./ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">Tags</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">Categories</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/about/ ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">About</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/link/ ">
+                            <i class=" fab fa-weixin " style="color: hsl(152deg 73% 45%);"></i>
+                            <span class="layui-nav-item-name">友链</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/shuoshuo/ ">
+                            <i class=" fas fa-coffee " style="color:#31c7c1;"></i>
+                            <span class="layui-nav-item-name">说说</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/gina511.github.io/"><img src="img/header.png" onerror=this.onerror=null,this.src="/gina511.github.io/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>为你，千千万万遍</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://yaogina.github.io/gina511.github.io/" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="gina2021@hnu.edu.cn" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">本地llama.cpp搭建中文llama-alpaca-13B模型记录</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="Created 2024.03.24"><i class="far fa-calendar-alt"></i> 2024.03.24</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="Updated 2024.03.24"><i class="far fa-calendar-check"></i> 2024.03.24</span>
+      </div>
+     
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.3k words</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">5 min</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><p>参加了个比赛需要调用语言模型对输入文本进行提取与推理，就找到了目前开源的nlp中表现非常出色的llama二次训练增加中文词表后端的alpaca模型（<a target="_blank" rel="noopener" href="https://github.com/ymcui/Chinese-LLaMA-Alpaca?tab=readme-ov-file">项目开源地址</a>）。网上的教程大部分都是对7B的模型，以及官网给的教程我本地跑环境的时候也有问题，这里就浅浅记录一下大概流程。</p>
+<span id="more"></span>
+
+<h2 id="一、下载模型"><a href="#一、下载模型" class="headerlink" title="一、下载模型"></a>一、下载模型</h2><p>从<a target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1MTsKlzR61xmbTR4hBWzQas_MOpUZsogN">这个地址</a>下载llama-alpaca-13B模型文件。</p>
+<p>项目的模型文件需要分开下载，llama要专门到meta下载，之后整合。但这个链接里是整合后的alpaca-13B模型，就可以省略整合的步骤。</p>
+<h2 id="二、整合模型"><a href="#二、整合模型" class="headerlink" title="二、整合模型"></a>二、整合模型</h2><p>下载好模型之后，使用官方提供的llama.cpp工具包量化模型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ggerganov/llama.cpp</span><br><span class="line">cd llama.cpp</span><br></pre></td></tr></table></figure>
+
+<p>下载好后，windows还需要下载W64devkit去编译这个文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake . -G &quot;MinGW Makefiles&quot;</span><br><span class="line">cmake --build . --config Release</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/990dc113416d520540988e71008858a.png" alt="image-20240324170653666"></p>
+<p>编译好后会生成一些可执行文件在这里。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/c37c6d317ec9c0746dce2e98df574d7.png" alt="image-20240324170653666"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:/test/ap/test/llama.cpp $ python3 -m pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>这里下载一些依赖的环境。</p>
+<p>这之后就可以加载模型了。先在llama.cpp文件夹里面创建文件夹zh-model&#x2F;13B&#x2F;，把所有的刚刚从llama-alpaca-13B模型文件（包括配置文件）全都拷贝进去。但是tockenizer.model放外面。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/d227603dc0174c25247ffac5036fab9.png" alt="image-20240324171622925"></p>
+<p>之后回到llama.cpp目录，执行下面这个指令。这个指令用来整合刚刚由于大小问题分割的三个.bin文件，默认生成一个ggml-model-f16.gguf文件（整合后的模型文件，大概24个G）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:/test/ap/test/llama.cpp $ python3 convert.py zh-model/13B/</span><br></pre></td></tr></table></figure>
+
+<p>w64devkit终端会一直跑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[  1/363] Writing tensor token_embd.weight                      | size  55296 x   5120  | type F16  | T+   9</span><br><span class="line">[  2/363] Writing tensor blk.0.attn_q.weight                    | size   5120 x   5120  | type F16  | T+  27</span><br><span class="line">[  3/363] Writing tensor blk.0.attn_k.weight                    | size   5120 x   5120  | type F16  | T+  28</span><br><span class="line">[  4/363] Writing tensor blk.0.attn_v.weight                    | size   5120 x   5120  | type F16  | T+  29</span><br><span class="line">[  5/363] Writing tensor blk.0.attn_output.weight               | size   5120 x   5120  | type F16  | T+  30</span><br><span class="line">[  6/363] Writing tensor blk.0.ffn_gate.weight                  | size  13824 x   5120  | type F16  | T+  32</span><br><span class="line">[  7/363] Writing tensor blk.0.ffn_up.weight                    | size  13824 x   5120  | type F16  | T+  36</span><br><span class="line">[  8/363] Writing tensor blk.0.ffn_down.weight                  | size   5120 x  13824  | type F16  | T+  41</span><br><span class="line">[  9/363] Writing tensor blk.0.attn_norm.weight                 | size   5120           | type F32  | T+  46</span><br><span class="line">[ 10/363] Writing tensor blk.0.ffn_norm.weight                  | size   5120           | type F32  | T+  46</span><br><span class="line">[ 11/363] Writing tensor blk.1.attn_q.weight                    | size   5120 x   5120  | type F16  | T+  46</span><br><span class="line">[ 12/363] Writing tensor blk.1.attn_k.weight                    | size   5120 x   5120  | type F16  | T+  48</span><br><span class="line">[ 13/363] Writing tensor blk.1.attn_v.weight                    | size   5120 x   5120  | type F16  | T+  50</span><br><span class="line">[ 14/363] Writing tensor blk.1.attn_output.weight               | size   5120 x   5120  | type F16  | T+  52</span><br><span class="line">[ 15/363] Writing tensor blk.1.ffn_gate.weight                  | size  13824 x   5120  | type F16  | T+  54</span><br><span class="line">[ 16/363] Writing tensor blk.1.ffn_up.weight                    | size  13824 x   5120  | type F16  | T+  57</span><br><span class="line">[ 17/363] Writing tensor blk.1.ffn_down.weight                  | size   5120 x  13824  | type F16  | T+  61</span><br></pre></td></tr></table></figure>
+
+<p>等他刷完，就整合好模型了。</p>
+<p>到这一步其实就可以去使用这个整合好后的alpaca模型去做任务分析了。但是我自己电脑配置不是很好，直接跑能跑一个世纪，就对这个模型做了一下4bit量化，不需要的话可以直接跳过。</p>
+<h2 id="三、量化模型"><a href="#三、量化模型" class="headerlink" title="三、量化模型"></a>三、量化模型</h2><p>量化这里遇到了个坑，github给的教程是让输入这个指令。但是整合模型生成的文件后缀名是gguf,量化模型生成的文件后缀名也是gguf,官网给的bin。直接输入下面这个指令会报错： <strong>failed to quantize: basic_ios::clear: iostream error</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:/test/ap/test/llama.cpp $ ./bin/quantize ./zh-model/13B/ggml-model-f16.gguf ./zh-models/13B/ggml-model-q4_0.bin q4_0</span><br></pre></td></tr></table></figure>
+
+<p>解决方法也很简答，输入这个指令，不去指定量化后文件的类型就好了。量化模型文件会默认放在&#x2F;zh-model&#x2F;13B&#x2F;这里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F:/test/ap/test/llama.cpp $ ./bin/quantize ./zh-model/13B/ggml-model-f16.gguf  q4_0</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、运行"><a href="#四、运行" class="headerlink" title="四、运行"></a>四、运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/main -m zh-model/13B/ggml-model-Q4_0.gguf --color -f prompts/alpaca.txt -ins -c 2048 --temp 0.2 -n 256 --repeat_penalty 1.1</span><br></pre></td></tr></table></figure>
+
+<p>就可以跑了</p>
+<p>运行结果如下：</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/64fdca7e7dadcdd1340975893c70f44.png" alt="image-20240324172802554"></p>
+<p>完结撒花！</p>
+<h3 id="五、问题总结"><a href="#五、问题总结" class="headerlink" title="五、问题总结"></a>五、问题总结</h3><p>在这个之前的一些python conda什么的就没有再去写了，这个环境官网也有给，网上也有教程。比较坑的是，要注意编译llama.cpp生成的可执行文件的位置，网上教程生成的文件位置和我编译出来的位置不一样，要自己修改路径。以及网上教程什么的生成的模型文件都是.bin，可能因为我在做的是13B,网上的都是7B ?我这边生成的模型文件都是.gguf文件。所以后面会遇到这种文件类型不同报错的问题。</p>
+<p>最后4bit量化后的运行速度感觉还能接受，8核cpu电脑100%左右利用率大概三十秒能够刷出来回复，使用下来的体验也和gpt-3，星火之类的差不多，但这只是13B。还有33B和70B配置问题没有选择去用。真的是感觉是开源nlp里非常顶尖的了，有时间去看一下llama的论文，以上。</p>
+</div>
+        
+          <div class="post-copyright">
+                  <div class="copyright-item">
+                      <span> Author: Gina</span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> Link: <a href="https://yaogina.github.io/gina511.github.io/2024/03/24/Windows%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAchinese-llama-alpaca-13B%E8%BF%87%E7%A8%8B/">https://yaogina.github.io/gina511.github.io/2024/03/24/Windows%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAchinese-llama-alpaca-13B%E8%BF%87%E7%A8%8B/</a></span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> License: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
+                  </div>
+          </div>
+        
+  </div>
+
+  <div class="share-reward">
+    <div class="share">
+        
+<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
+
+
+      </div>
+        <div class="reward">
+          
+        </div>
+    </div>
+    
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/NLP/" class="tag">NLP</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/llama/" class="tag">llama</a>
+      
+    </div>
+    <div class="post-nav">
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/gina511.github.io/2024/03/10/hello-world/" >Hello World<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+  <div id="valine"></div>
+  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+        new Valine({
+          el: '#valine',
+          appId: "",
+          appKey: "",
+          avatar: "mm",
+          lang: "",
+          meta: 'nick,mail,link'.split(','),
+          requiredFields: 'nick,mail'.split(','),
+          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
+          pageSize:'10',
+          recordIP: 'false',
+          serverURLs: "",
+          emojiCDN: "",
+          enableQQ: "true",
+        });
+  </script>
+  
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    
+<div id="bottom-outer">
+    <div id="bottom-inner">
+        © 2020 <i class="fa fa-heart" id="heart"></i> Gina 
+        <br>
+        Powered by 
+        <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/">blank</a>
+        
+          <div class="icp-info">
+            
+          <a href="" target="_blank"> </a>
+        </div>
+        
+    </div>  
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/gina511.github.io/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+  <script>
+    jQuery(document).ready(function () {
+      var QRBox = $('#QRBox');
+      var MainBox = $('#MainBox');
+      var AliPayQR = '';
+      var WeChanQR = '';
+
+      function showQR(QR) {
+        if (QR) {
+          MainBox.css('background-image', 'url(' + QR + ')');
+        }
+        $('#donateBox').addClass('blur');
+        QRBox.fadeIn(300, function (argument) {
+          MainBox.addClass('showQR');
+        });
+      }
+
+      $('#donateBox>li').click(function (event) {
+        var thisID = $(this).attr('id');
+        if (thisID === 'AliPay') {
+          showQR(AliPayQR);
+        } else if (thisID === 'WeChat') {
+          showQR(WeChanQR);
+        }
+      });
+
+      MainBox.click(function (event) {
+        MainBox.removeClass('showQR').addClass('hideQR');
+        setTimeout(function (a) {
+          QRBox.fadeOut(300, function (argument) {
+            MainBox.removeClass('hideQR');
+          });
+          $('#DonateText,#donateBox,#github').removeClass('blur');
+        }, 600);
+
+      });
+    });
+  </script>
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+
+</html>
