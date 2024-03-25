@@ -22,7 +22,7 @@
 
   
 
-  <title>Hello World | Gina</title>
+  <title>中文llama-alpaca论文阅读记录 | Gina</title>
 
   
 
@@ -180,26 +180,32 @@
 
     
 <article id="post">
-  <div class="post-title">Hello World</div>
+  <div class="post-title">中文llama-alpaca论文阅读记录</div>
   
 <div class="post-meta">
     
     
       <div class="post-meta-item date">
-        <span title="Created 2024.03.10"><i class="far fa-calendar-alt"></i> 2024.03.10</span>
+        <span title="Created 2024.03.24"><i class="far fa-calendar-alt"></i> 2024.03.24</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="Updated 2024.03.12"><i class="far fa-calendar-check"></i> 2024.03.12</span>
+        <span title="Updated 2024.03.25"><i class="far fa-calendar-check"></i> 2024.03.25</span>
       </div>
      
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">NLP论文阅读</a>
+        
+      </div>
      
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">75 words</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">683 words</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 min</span>
+          <i class="far fa-clock"></i> <span class="post-count">2 min</span>
                                
       </div>
      
@@ -208,20 +214,31 @@
 
   
   <div class="content">
-        <div><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <div><h2 id="EFFICIENT-AND-EFFECTIVE-TEXT-ENCODING-FOR-CHINESE-LLAMA-AND-ALPACA"><a href="#EFFICIENT-AND-EFFECTIVE-TEXT-ENCODING-FOR-CHINESE-LLAMA-AND-ALPACA" class="headerlink" title="EFFICIENT AND EFFECTIVE TEXT ENCODING FOR CHINESE LLAMA AND ALPACA"></a>EFFICIENT AND EFFECTIVE TEXT ENCODING FOR CHINESE LLAMA AND ALPACA</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/image-20240325231943333.png" alt="image-20240325231943333"></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/image-20240325220529738.png" alt="image-20240325220529738"></p>
+<h3 id="一、低秩适应（LORA）"><a href="#一、低秩适应（LORA）" class="headerlink" title="一、低秩适应（LORA）"></a>一、低秩适应（LORA）</h3><p>​	使用这个主要是为了进行高效的参数微调。原理是冻结预训练的模型权重，并且将可训练的低秩举证注入每一层。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/image-20240325224517407.png" alt="image-20240325224517407"></p>
+<p>具体方式如上，W0是原有模型的权重，不会梯度更新。矩阵B和矩阵A是可训练矩阵，d为输出维数，k为输入维数。之后主要将这种LORA适配器合并到<strong>attention mode</strong>和<strong>MLP层</strong>。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/image-20240325225609663.png" alt="image-20240325225609663"></p>
+<p>​	之后论文对任务的主要处理是最小化tocken的负似然对数。个人理解是在计算最可能出现在当前句子后的下一个tocken，然后输出，感觉和GPT是一个思想。但这里论文也指出了有一个问题，通过这种方式，模型输出的是后续最可能出现的文本，但是并不一定符合用户的需求。大概就像是去饭店点餐，用户说要吃东西，餐厅就给了以前最多客户点的菜单，但是忽略了用户本身的诉求。</p>
+<p>​	论文中同样也提出了解决方式：用<strong>指令</strong>提示模型。对模型的<strong>输入&#x3D;指令提示+输入</strong>（中间用\n连接）。这样每次都在提醒模型需要完成用户的需求（个人理解是这样），模型会避免自顾自生成最可能序列。</p>
+<p>​	</p>
+<h3 id="二、扩展词汇表"><a href="#二、扩展词汇表" class="headerlink" title="二、扩展词汇表"></a>二、扩展词汇表</h3><p>​	使用sentencepece在中文语料库上训练中文标记器的词汇量（2w），之后合并到原始的llama分词器中。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/image-20240325221057736.png" alt="image-20240325221057736"></p>
+<p>效果如上：可以看出来加入新的分词器后，对中文语句的分词更加简洁高效、合理。论文指出，token长度大概是原本的一半，且生成速度也是原始生成速度的两倍。</p>
+<h3 id="三、解码"><a href="#三、解码" class="headerlink" title="三、解码"></a>三、解码</h3><ul>
+<li>1.上下文</li>
+<li>2.限制最大生成序列长度</li>
+<li><strong>温度（低温度输出更加集中确定，高温度多样化）</strong></li>
+<li>top-k采样</li>
+<li><strong>top-抽样</strong></li>
+<li>重复惩罚</li>
+</ul>
+<p>这里其实对温度和top-p抽样不太了解，Mark一下，后续查一下是什么。</p>
+<h3 id="四、量化性能"><a href="#四、量化性能" class="headerlink" title="四、量化性能"></a>四、量化性能</h3><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/image-20240325231417085.png" alt="image-20240325231417085"></p>
+<p>部署的时候查看量化教程有使用8bit 也有5bit的,但大多数都是4bit，看论文才知道大概原因。论文也指出规模越大的模型，在越低bit量化时的表现越好。</p>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>忽略了中间对性能比较的一些介绍的总结：不同数据集表现，不同规模模型同一任务表现等等。</p>
+<p>还有很多提及的概念不知道，后续找到比较好的介绍教程，会以链接的方式加在文字上，以上。</p>
 </div>
         
           <div class="post-copyright">
@@ -229,7 +246,7 @@
                       <span> Author: Gina</span>
                   </div>
                   <div class="copyright-item">
-                      <span> Link: <a href="https://yaogina.github.io/gina511.github.io/2024/03/10/hello-world/">https://yaogina.github.io/gina511.github.io/2024/03/10/hello-world/</a></span>
+                      <span> Link: <a href="https://yaogina.github.io/gina511.github.io/2024/03/24/llama%E8%AE%BA%E6%96%87/">https://yaogina.github.io/gina511.github.io/2024/03/24/llama%E8%AE%BA%E6%96%87/</a></span>
                   </div>
                   <div class="copyright-item">
                       <span> License: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
@@ -254,16 +271,24 @@
     
     <div class="post_tags">
       
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/NLP/" class="tag">NLP</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/llama/" class="tag">llama</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/alpaca/" class="tag">alpaca</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/LORA/" class="tag">LORA</a>
+      
     </div>
     <div class="post-nav">
       
         <div class="post-nav-prev post-nav-item">
-            <a href="/gina511.github.io/2024/03/24/llama%E8%AE%BA%E6%96%87/" >中文llama-alpaca论文阅读记录<i class="fa fa-chevron-left"></i></a>
+            <a href="/gina511.github.io/2024/03/24/Windows%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAchinese-llama-alpaca-13B%E8%BF%87%E7%A8%8B/" >本地llama.cpp搭建中文llama-alpaca-13B模型记录<i class="fa fa-chevron-left"></i></a>
         </div>
       
       
         <div class="post-nav-next post-nav-item">
-            <a href="/gina511.github.io/2024/02/01/Vue-laravel%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" >Vue+laravel博客开发实战（web建站流程）<i class="fa fa-chevron-right"></i></a>
+            <a href="/gina511.github.io/2024/03/10/hello-world/" >Hello World<i class="fa fa-chevron-right"></i></a>
         </div>
       
     </div>
