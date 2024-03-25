@@ -189,7 +189,7 @@
         <span title="Created 2024.03.24"><i class="far fa-calendar-alt"></i> 2024.03.24</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="Updated 2024.03.24"><i class="far fa-calendar-check"></i> 2024.03.24</span>
+        <span title="Updated 2024.03.25"><i class="far fa-calendar-check"></i> 2024.03.25</span>
       </div>
      
     
@@ -202,10 +202,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.3k words</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.5k words</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">5 min</span>
+          <i class="far fa-clock"></i> <span class="post-count">6 min</span>
                                
       </div>
      
@@ -253,7 +253,17 @@
 <p>运行结果如下：</p>
 <p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/64fdca7e7dadcdd1340975893c70f44.png" alt="image-20240324172802554"></p>
 <p>完结撒花！</p>
-<h3 id="五、问题总结"><a href="#五、问题总结" class="headerlink" title="五、问题总结"></a>五、问题总结</h3><p>在这个之前的一些python conda什么的就没有再去写了，这个环境官网也有给，网上也有教程。比较坑的是，要注意编译llama.cpp生成的可执行文件的位置，网上教程生成的文件位置和我编译出来的位置不一样，要自己修改路径。以及网上教程什么的生成的模型文件都是.bin，可能因为我在做的是13B,网上的都是7B ?我这边生成的模型文件都是.gguf文件。所以后面会遇到这种文件类型不同报错的问题。</p>
+<h2 id="五、本地server使用api调用alpaca"><a href="#五、本地server使用api调用alpaca" class="headerlink" title="五、本地server使用api调用alpaca"></a>五、本地server使用api调用alpaca</h2><p>本来以为会很困难，但是看了一下llama.cpp的文档，发现提供了server.exe启动在本地服务器中。具体操作如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./server.exe -m ./zh-model/13B/ggml-model-Q4_0.gguf -c 2048</span><br></pre></td></tr></table></figure>
+
+<p>w64终端输入这个指令，项目重建了一下，所以不需要再进bin目录找可执行文件。官方也给了其他很多参数可以选择，包括CPU权重，上下文什么的，要求不高只需要使用的话简单执行这个代码就好。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/312aa8179367aad2f37d769c6175309.png" alt="image-20240324172802554"></p>
+<p>终端加载完模型后，会提示端口和IP地址（当然是本地了），然后可以到浏览器<a href="http://ip:port直接打开图形界面如下，输入聊天内容就可以正常对话啦。">http://ip:port直接打开图形界面如下，输入聊天内容就可以正常对话啦。</a></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/6b89697e730795617a3525512ef8d05.png" alt="6b89697e730795617a3525512ef8d05"></p>
+<p>既然可以这样调用，那么一定可以api调用，这里就浅放一下apifox的测试：</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/img/64224929093a13e6df648106c4115eb.png" alt="64224929093a13e6df648106c4115eb"></p>
+<p>到这里，这个模型放在比赛项目里已经可以正常使用了。时间允许的话会尝试再训练一下模型，如果….毕竟还没有看llama的论文。</p>
+<h3 id="六、问题总结"><a href="#六、问题总结" class="headerlink" title="六、问题总结"></a>六、问题总结</h3><p>在这个之前的一些python conda什么的就没有再去写了，这个环境官网也有给，网上也有教程。比较坑的是，要注意编译llama.cpp生成的可执行文件的位置，网上教程生成的文件位置和我编译出来的位置不一样，要自己修改路径。以及网上教程什么的生成的模型文件都是.bin，可能因为我在做的是13B,网上的都是7B ?我这边生成的模型文件都是.gguf文件。所以后面会遇到这种文件类型不同报错的问题。</p>
 <p>最后4bit量化后的运行速度感觉还能接受，8核cpu电脑100%左右利用率大概三十秒能够刷出来回复，使用下来的体验也和gpt-3，星火之类的差不多，但这只是13B。还有33B和70B配置问题没有选择去用。真的是感觉是开源nlp里非常顶尖的了，有时间去看一下llama的论文，以上。</p>
 </div>
         
