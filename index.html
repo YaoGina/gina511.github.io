@@ -272,6 +272,77 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
+            <a href="/gina511.github.io/2024/03/12/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/"></a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="Created 2024.03.12"><i class="far fa-calendar-alt"></i> 2024.03.12</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="Updated 2024.03.21"><i class="far fa-calendar-check"></i> 2024.03.21</span>
+              </div>
+             
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.8k words</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">6 min</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <h1 id="Dimma-Semi-supervised-Low-Light-Image-Enhancement-with-Adaptive-Dimming"><a href="#Dimma-Semi-supervised-Low-Light-Image-Enhancement-with-Adaptive-Dimming" class="headerlink" title="Dimma: Semi-supervised Low Light Image Enhancement with Adaptive Dimming"></a>Dimma: Semi-supervised Low Light Image Enhancement with Adaptive Dimming</h1><p>​						Wojciech Kozłowski, Michał Szachniewicz, Michał Stypułkowski, Maciej Zięba   2023-10-14 </p>
+<p>​								   			自适应调光半监督弱光图像增强论文阅读报告</p>
+<p>​											智能2103			  姚姬娜     		202108040304</p>
+<h2 id="一、论文分析"><a href="#一、论文分析" class="headerlink" title="一、论文分析"></a>一、论文分析</h2><h3 id="1-1主要内容"><a href="#1-1主要内容" class="headerlink" title="1.1主要内容"></a>1.1主要内容</h3><p>​		这篇论文提出了一种用于微光图像增强的半监督学习方法。利用较少数目的图像对来解决大数据集不足的相关问题。对于这些图像对，论文描述训练现有的模型模仿一个特定的相机在低光照条件下的特性，从而有效的 恢复特定相机捕获的黑暗图像。</p>
+<h3 id="1-2主要贡献"><a href="#1-2主要贡献" class="headerlink" title="1.2主要贡献"></a>1.2主要贡献</h3><p>​		和现有的全监督训练方法相比，Dimma使用的数据数目更少并且不需要过多标记，且对于图像增强的效果相当。并且优于所有的无监督训练方法。High <strong>PSNRA</strong>和<strong>DeltaE</strong>表明，Dimma模型在光照和颜色各方面表现出了很强的准确性，并且High PSNRA和DeltaE指标数据表明生成的图像非常真实。在跨数据集的测试中也有很好的效果，具有很强的泛化能力。</p>
+<h3 id="1-3研究方法"><a href="#1-3研究方法" class="headerlink" title="1.3研究方法"></a>1.3研究方法</h3><p>​		该模型包括两个关键组件：调光模块和增亮模块。</p>
+<h4 id="1-3-1调光模块"><a href="#1-3-1调光模块" class="headerlink" title="1.3.1调光模块"></a>1.3.1调光模块</h4><p>​	调光模块是该模型的核心组件之一。</p>
+<p>​	Retinex分解是一种将图像分解为光照（illumination）和反射率（reflectance）的方法，有助于改善图像恢复质量。它首先将图像分割成照明（L）和反射率（R）两个组件，为了处理低光照情况下的图像，模型创建了一个名为Lp的比较暗的等效照明量。这一分解过程通过一个复杂的公式实现，确保了对图像细节的准确捕捉。</p>
+<p>​        <img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240314141058225.png" alt="image-20240314141058225"></p>
+<p>​					其中，Ii和Ri分别表示图像I的第i个通道和反射率R的第i个通道。      </p>
+<p> 接着，模型引入混合密度网络（MDN）来调节反射率R。这个设计的巧妙之处在于能够学习颜色噪声，同时考虑到源图像和目标图像的局部亮度。反射率R、照明L和Lp作为5通道输入，深度网络通过精细的权重计算能够优化图像的增强效果。</p>
+<p>​       <img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240314141135071.png" alt="image-20240314141135071"></p>
+<p>​		在MDN中，为了提高泛化能力，避免模型在训练时的过拟合问题，研究人员仅使用lxl卷积滤波器。这种精妙的设计保证了模型在处理各种图像时能够保持稳定且准确。最后，在生成图像的阶段，模型将预测的均值添加回原始图像，以便更好地预测颜色差异，而非仅仅考虑总体反射率。</p>
+<p>​          <img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240314141158405.png" alt="image-20240314141158405"></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240317201438195.png" alt="image-20240317201438195">Retinex算法的核心思想是通过在图像中对比度增强的方式来减少光照条件的影响，使得图像中的细节更加清晰和鲜明。通过对图像的亮度和颜色进行分离和调整，Retinex算法可以更好地还原图像的真实色彩和细节，提高图像的视觉质量。</p>
+<p><code>conv2d</code>通常是指二维卷积操作。二维卷积（2D Convolution）是深度学习中常用的一种操作，用于从输入图像中提取特征。 在卷积神经网络（CNN）中，<code>conv2d</code>操作通常用于图像处理任务。它通过在输入图像上滑动一个卷积核（也称为滤波器）来对图像进行卷积操作</p>
+<h4 id="1-3-2-亮度模块"><a href="#1-3-2-亮度模块" class="headerlink" title="1.3.2 亮度模块"></a>1.3.2 亮度模块</h4><p>​		亮度模块的设计灵感源自UNet模型的结构，但在此基础上经过一系列精心的改进，使得模型能够更深入地理解亮度特征的表达和调整。在模型的训练过程中，关键的一步是通过对原始图像和模糊图像之间的亮度差异进行对比学习，这种操作使得模型能够更有效地获取并理解图像中的亮度信息，从而实现对亮度的精确调整和增强。通过这种方式，模型可以更准确地捕捉图像中的亮度变化和细微差别，从而提升图像增强的效果和质量。这种基于亮度差异的学习方法为模型提供了深入理解和处理亮度特征的能力，为图像处理任务带来了更高的准确性和可靠性。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240317201552473.png" alt="image-20240317201552473"></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240317201724423.png" alt="image-20240317201724423"></p>
+<h3 id="1-4-结论"><a href="#1-4-结论" class="headerlink" title="1.4 结论"></a>1.4 结论</h3><p>​		结果如表格所示，该模型取得了较高的效果，尤其是只有少数数据对的情况下，Dimma方法明显效果要优于其他方法。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240314141226068.png" alt="image-20240314141226068"></p>
+<ol>
+<li><strong>定量比较（Quantitative Comparison）</strong>：在LOL数据集上进行了定量比较。他们使用了3、5、8或480对真实图像来训练调暗模块，然后引入了MixHQ数据集，包含来自多个数据集的1.5万多张自然图像，用于训练亮化模块。实验结果表明，即使在有限的真实图像对训练下，Dimma模型达到了与现有监督方法可比的结果，并优于所有无监督方法。</li>
+<li><strong>消融研究（Ablation Study）</strong>：进一步验证了他们方法的有效性，比较了使用Dimma进行半监督训练和单独训练UNet（没有调暗模块）的结果。实验结果表明，使用具有MDN的调暗模块进行半监督训练的效果要优于仅使用UNet的训练。 总的来说，作者通过这些实验验证了Dimma模型相对于以前方法的优越性，展示了其在图像增强任务中的出色表现。详细的实验结果和分析可以在文中的各个表格和附录中找到。</li>
+</ol>
+<h3 id="1-5-创新点"><a href="#1-5-创新点" class="headerlink" title="1.5 创新点"></a>1.5 创新点</h3><p>​		这篇论文的创新之处在于专注于半监督训练方法，在面对数据稀缺情况下仍能实现出色的图像增强效果。通过利用多通道信息，精确计算反射率、照明和位置等因素，该方法成功实现了对调光因子的准确分级，为微光图像增强领域带来了新的突破和进展。</p>
+<h3 id="1-6-参考文献"><a href="#1-6-参考文献" class="headerlink" title="1.6 参考文献"></a>1.6 参考文献</h3><p>Bishop, C. M. 1994. Mixture density networks.</p>
+<p>Cai, J.; Gu, S.; and Zhang, L. 2018. Learning a deep singleimage contrast enhancer from multi-exposure images. <em>IEEE**Transactions on Image Processing</em>, 27(4): 2049–2062.</p>
+<p>Cai, Y.; Bian, H.; Lin, J.; Wang, H.; Timofte, R.; and Zhang,Y. 2023. Retinexformer: One-stage Retinex-based Transformer for Low-light Image Enhancement. <em>arXiv preprint**arXiv:2303.06705</em>.</p>
+<p>Chen, C.; Chen, Q.; Xu, J.; and Koltun, V. 2018. Learningto see in the dark. In <em>Proceedings of the IEEE conference on**computer vision and pattern recognition</em>, 3291–3300.Deng, J.; Dong, W.; Socher, R.; Li, L.-J.; Li, K.; and Fei</p>
+<p>Fei, L. 2009. Imagenet: A large-scale hierarchical imagedatabase. In <em>2009 IEEE conference on computer vision and</em>pattern recognition*, 248–255. Ieee.</p>
+<p>Guo, C.; Li, C.; Guo, J.; Loy, C. C.; Hou, J.; Kwong, S.;and Cong, R. 2020. Zero-reference deep curve estima</p>
+<p>tion for low-light image enhancement. In <em>Proceedings of**the IEEE&#x2F;CVF conference on computer vision and pattern</em>recognition*, 1780–1789.</p>
+<p>Guo, X. 2016. Lime: a method for low-light image enhancement. In <em>Proceedings of the 24th ACM international confer</em>ence on Multimedia*, 87–91.</p>
+<p>Ho, J.; Jain, A.; and Abbeel, P. 2020. Denoising diffusionprobabilistic models. <em>Advances in Neural Information Pro**cessing Systems</em>, 33: 6840–6851.</p>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
             <a href="/gina511.github.io/2024/03/10/hello-world/">Hello World</a>
           </div>
           <div class="post-meta">
