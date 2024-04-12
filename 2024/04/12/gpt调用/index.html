@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/gina511.github.io/img/favicon.png">
+  
+  
+      <meta name="author" content="Gina">
+  
+  
+  
+  
+  
+    <link rel="alternate" href="/gina511.github.io/atom.xml " title="Gina" type="application/atom+xml">
+  
+
+  
+
+  <title>NLP接口调用记录 | Gina</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/gina511.github.io/css/style.css" >
+  <link rel="stylesheet" href="/gina511.github.io/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/gina511.github.io/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/gina511.github.io/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/gina511.github.io/" title="Gina">Gina</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/ ">
+                            <i class=" fab fa-fort-awesome " style="color: rgb(255 107 107);"></i>
+                            <span class="layui-nav-item-name">首页</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">列表</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/tags ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/profile/湖南大学人工智能专业姚姬娜.pdf ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/link/ ">
+                            <i class=" fab fa-weixin " style="color: hsl(152deg 73% 45%);"></i>
+                            <span class="layui-nav-item-name">友链</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/shuoshuo/ ">
+                            <i class=" fas fa-coffee " style="color:#31c7c1;"></i>
+                            <span class="layui-nav-item-name">说说</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/gina511.github.io/"><img src="img/header.png" onerror=this.onerror=null,this.src="/gina511.github.io/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>为你，千千万万遍</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://yaogina.github.io/gina511.github.io/" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="gina2021@hnu.edu.cn" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">NLP接口调用记录</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="Created 2024.04.12"><i class="far fa-calendar-alt"></i> 2024.04.12</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="Updated 2024.04.12"><i class="far fa-calendar-check"></i> 2024.04.12</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/NLP/">NLP</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.4k words</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">7 min</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><p>又遇到一个项目需要调用gpt，这里就作为一个调用大模型api代码的合集吧，目前只有php代码，真的很喜欢php真的很方便。</p>
+<span id="more"></span>
+
+<p>已有模型示例</p>
+<ul>
+<li>GPT 3.5</li>
+<li>GPT 4</li>
+<li>科大讯飞星火</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//gpt3.5</span></span><br><span class="line"><span class="variable">$modelApiKey</span> = <span class="string">&#x27;sk-yaoshulanianshunianderenxiangshu&#x27;</span>;</span><br><span class="line"><span class="variable">$apiEndpoint</span> = <span class="string">&#x27;https://api.openai.com/v1/completions&#x27;</span>;<span class="comment">// 准备要发送的数据</span></span><br><span class="line"><span class="variable">$data</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;prompt&#x27;</span> =&gt; <span class="string">&#x27;尽可能详细告诉我是谁，回复长一点&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;max_tokens&#x27;</span> =&gt; <span class="number">1024</span>,</span><br><span class="line">    <span class="string">&#x27;temperature&#x27;</span> =&gt; <span class="number">0.6</span>,</span><br><span class="line">    <span class="string">&#x27;n&#x27;</span> =&gt; <span class="number">1</span>,</span><br><span class="line">    <span class="string">&#x27;model&#x27;</span> =&gt; <span class="string">&#x27;gpt-3.5-turbo-instruct&#x27;</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// 实例CURL</span></span><br><span class="line"><span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$apiEndpoint</span>);</span><br><span class="line"><span class="comment">//使用本地的梯子服务器中转，我的php没有配置翻墙，大概就是windows会把php的翻墙行为拦下来，所以只能通过这种方式伪翻墙</span></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_PROXY, <span class="string">&#x27;127.0.0.1:7890&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="literal">true</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_POST, <span class="literal">true</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_POSTFIELDS, <span class="title function_ invoke__">json_encode</span>(<span class="variable">$data</span>));</span><br><span class="line"><span class="comment">// 禁用证书验证，ssl之前配https协议的时候做过，这里不关闭验证就会报错，maven的springboot好像可以完成这个验证,等之后有空尝试一下。</span></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYPEER, <span class="literal">false</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYHOST, <span class="literal">false</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;Content-Type: application/json&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Authorization: Bearer &#x27;</span> . <span class="variable">$modelApiKey</span></span><br><span class="line">));</span><br><span class="line"><span class="variable">$response</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">curl_errno</span>(<span class="variable">$ch</span>)) &#123;</span><br><span class="line">    <span class="variable">$error</span> = <span class="title function_ invoke__">curl_error</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;请求错误：&#x27;</span> . <span class="variable">$error</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 关闭cURL</span></span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$response</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="variable">$answer</span> = <span class="variable">$result</span>[<span class="string">&#x27;choices&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;text&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$response</span>;</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="keyword">echo</span>  <span class="variable">$answer</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>GPT 4.0</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$modelApiKey</span> = <span class="string">&#x27;sk-yaoxiaolushitouzhunishuoduibudui&#x27;</span>;</span><br><span class="line"><span class="comment">// 设置API端点</span></span><br><span class="line"><span class="variable">$apiEndpoint</span> = <span class="string">&#x27;https://api.openai.com/v1/chat/completions&#x27;</span>;<span class="comment">// 准备要发送的数据</span></span><br><span class="line"><span class="variable">$text</span> = <span class="string">&quot;内容&quot;</span>;</span><br><span class="line"><span class="variable">$data</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;messages&#x27;</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">        <span class="keyword">array</span>(<span class="string">&#x27;role&#x27;</span> =&gt; <span class="string">&#x27;system&#x27;</span>, <span class="string">&#x27;content&#x27;</span> =&gt; <span class="variable">$text</span>)</span><br><span class="line">    ),</span><br><span class="line">    <span class="string">&#x27;model&#x27;</span> =&gt; <span class="string">&#x27;gpt-4&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;max_tokens&#x27;</span> =&gt; <span class="number">1024</span>,</span><br><span class="line">    <span class="string">&#x27;temperature&#x27;</span> =&gt; <span class="number">0.6</span>,</span><br><span class="line">    <span class="string">&#x27;n&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line"><span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$apiEndpoint</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_PROXY, <span class="string">&#x27;127.0.0.1:7890&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="literal">true</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_POST, <span class="literal">true</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_POSTFIELDS, <span class="title function_ invoke__">json_encode</span>(<span class="variable">$data</span>));</span><br><span class="line"><span class="comment">// 禁用证书验证</span></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYPEER, <span class="literal">false</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYHOST, <span class="literal">false</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;Content-Type: application/json&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Authorization: Bearer &#x27;</span> . <span class="variable">$modelApiKey</span></span><br><span class="line">));</span><br><span class="line"><span class="variable">$response</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">curl_errno</span>(<span class="variable">$ch</span>)) &#123;</span><br><span class="line">    <span class="variable">$error</span> = <span class="title function_ invoke__">curl_error</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;请求错误：&#x27;</span> . <span class="variable">$error</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 关闭cURL</span></span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$response</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="variable">$answer</span> = <span class="variable">$result</span>[<span class="string">&#x27;choices&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;text&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$response</span>;</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="keyword">echo</span>  <span class="variable">$answer</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>讯飞星火大模型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Http</span>\<span class="title class_">Controllers</span>\<span class="title class_">Api</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span>(<span class="string">&#x27;/home/gina/my_laravel/vendor/autoload.php&#x27;</span>);</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">WebSocket</span>\<span class="title">Client</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DB</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$addr</span> = <span class="string">&quot;wss://spark-api.xf-yun.com/v3.5/chat&quot;</span>;</span><br><span class="line">        <span class="comment">// 密钥信息，在开放平台-控制台中获取：https://console.xfyun.cn/services/cbm</span></span><br><span class="line">        <span class="variable">$Appid</span> = <span class="string">&quot;我不知道&quot;</span>;</span><br><span class="line">        <span class="variable">$Apikey</span> = <span class="string">&quot;不要问我&quot;</span>;</span><br><span class="line">        <span class="variable">$ApiSecret</span> = <span class="string">&quot;去找讯飞&quot;</span>;</span><br><span class="line">        <span class="variable">$authUrl</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assembleAuthUrl</span>(<span class="string">&quot;GET&quot;</span>, <span class="variable">$addr</span>, <span class="variable">$Apikey</span>, <span class="variable">$ApiSecret</span>);</span><br><span class="line">        <span class="comment">// 创建ws连接对象</span></span><br><span class="line">        <span class="variable">$client</span> = <span class="keyword">new</span> <span class="title class_">Client</span>(<span class="variable">$authUrl</span>);</span><br><span class="line">        <span class="comment">// 连接到 WebSocket 服务器</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$client</span>) &#123;</span><br><span class="line">            <span class="comment">// 发送数据到 WebSocket 服务器</span></span><br><span class="line">            <span class="variable">$text</span> = DB::<span class="title function_ invoke__">table</span>(<span class="string">&quot;conversation&quot;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;=&quot;</span>, <span class="number">1</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">orderByDesc</span>(<span class="string">&quot;op_id&quot;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">value</span>(<span class="string">&quot;text&quot;</span>);</span><br><span class="line">           <span class="variable">$data</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getBody</span>(<span class="variable">$Appid</span>, <span class="variable">$text</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="variable">$client</span>-&gt;<span class="title function_ invoke__">send</span>(<span class="variable">$data</span>);</span><br><span class="line">            <span class="comment">// 从 WebSocket 服务器接收数据</span></span><br><span class="line">            <span class="variable">$answer</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="variable">$response</span> = <span class="variable">$client</span>-&gt;<span class="title function_ invoke__">receive</span>();</span><br><span class="line">                <span class="variable">$resp</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$response</span>, <span class="literal">true</span>);</span><br><span class="line">                <span class="variable">$code</span> = <span class="variable">$resp</span>[<span class="string">&quot;header&quot;</span>][<span class="string">&quot;code&quot;</span>];</span><br><span class="line">                <span class="comment">//  echo &quot;从服务器接收到的数据： &quot; . $response;</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="number">0</span> == <span class="variable">$code</span>) &#123;</span><br><span class="line">                    <span class="variable">$status</span> = <span class="variable">$resp</span>[<span class="string">&quot;header&quot;</span>][<span class="string">&quot;status&quot;</span>];</span><br><span class="line">                    <span class="keyword">if</span> (<span class="variable">$status</span> != <span class="number">2</span>) &#123;</span><br><span class="line">                        <span class="variable">$content</span> = <span class="variable">$resp</span>[<span class="string">&#x27;payload&#x27;</span>][<span class="string">&#x27;choices&#x27;</span>][<span class="string">&#x27;text&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">                        <span class="variable">$answer</span> .= <span class="variable">$content</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="variable">$content</span> = <span class="variable">$resp</span>[<span class="string">&#x27;payload&#x27;</span>][<span class="string">&#x27;choices&#x27;</span>][<span class="string">&#x27;text&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">                        <span class="variable">$answer</span> .= <span class="variable">$content</span>;</span><br><span class="line">                        <span class="variable">$total_tokens</span> = <span class="variable">$resp</span>[<span class="string">&#x27;payload&#x27;</span>][<span class="string">&#x27;usage&#x27;</span>][<span class="string">&#x27;text&#x27;</span>][<span class="string">&#x27;total_tokens&#x27;</span>];</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">&quot;服务返回报错&quot;</span> . <span class="variable">$response</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">print</span>(<span class="string">&quot;\n返回结果为：\n&quot;</span>);</span><br><span class="line">            <span class="keyword">print</span>(<span class="variable">$answer</span>);</span><br><span class="line">            <span class="variable">$maxOpId</span> = DB::<span class="title function_ invoke__">table</span>(<span class="string">&quot;conversation&quot;</span>)-&gt;<span class="title function_ invoke__">max</span>(<span class="string">&quot;op_id&quot;</span>);</span><br><span class="line"><span class="variable">$newOpId</span> = <span class="variable">$maxOpId</span> + <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 创建新记录并存储answer到text字段</span></span><br><span class="line">DB::<span class="title function_ invoke__">table</span>(<span class="string">&quot;conversation&quot;</span>)-&gt;<span class="title function_ invoke__">insert</span>([</span><br><span class="line">    <span class="string">&quot;id&quot;</span> =&gt; <span class="number">0</span>,</span><br><span class="line">    <span class="string">&quot;op_id&quot;</span> =&gt; <span class="variable">$newOpId</span>,</span><br><span class="line">    <span class="string">&quot;text&quot;</span> =&gt; <span class="variable">$answer</span></span><br><span class="line">]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;无法连接到 WebSocket 服务器&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发送post请求</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> string $url 请求地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array $post_data post键值对数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">http_request</span>(<span class="params"><span class="variable">$url</span>, <span class="variable">$post_data</span>, <span class="variable">$headers</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$postdata</span> = <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$post_data</span>);</span><br><span class="line">        <span class="variable">$options</span> = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&#x27;http&#x27;</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">                <span class="string">&#x27;method&#x27;</span> =&gt; <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;header&#x27;</span> =&gt; <span class="variable">$headers</span>,</span><br><span class="line">                <span class="string">&#x27;content&#x27;</span> =&gt; <span class="variable">$postdata</span>,</span><br><span class="line">                <span class="string">&#x27;timeout&#x27;</span> =&gt; <span class="number">15</span> * <span class="number">60</span> <span class="comment">// 超时时间（单位:s）</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line">        <span class="variable">$context</span> = <span class="title function_ invoke__">stream_context_create</span>(<span class="variable">$options</span>);</span><br><span class="line">        <span class="variable">$result</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$url</span>, <span class="literal">false</span>, <span class="variable">$context</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// echo $result; </span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造参数体</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getBody</span>(<span class="params"><span class="variable">$appid</span>, <span class="variable">$question</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$header</span> = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&quot;app_id&quot;</span> =&gt; <span class="variable">$appid</span>,</span><br><span class="line">            <span class="string">&quot;uid&quot;</span> =&gt; <span class="string">&quot;12345&quot;</span></span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="variable">$parameter</span> = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&quot;chat&quot;</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">                <span class="string">&quot;domain&quot;</span> =&gt; <span class="string">&quot;generalv3.5&quot;</span>,</span><br><span class="line">                <span class="string">&quot;temperature&quot;</span> =&gt; <span class="number">0.5</span>,</span><br><span class="line">                <span class="string">&quot;max_tokens&quot;</span> =&gt; <span class="number">1024</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从数据库中获取对话数据</span></span><br><span class="line">        <span class="variable">$conversation</span> = DB::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;conversation&#x27;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">orderBy</span>(<span class="string">&#x27;op_id&#x27;</span>, <span class="string">&#x27;asc&#x27;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line">        <span class="variable">$messages</span> = [];</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$conversation</span> <span class="keyword">as</span> <span class="variable">$row</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$row</span>-&gt;id == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="variable">$role</span> = <span class="string">&quot;assistant&quot;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable">$role</span> = <span class="string">&quot;user&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable">$messages</span>[] = <span class="keyword">array</span>(<span class="string">&quot;role&quot;</span> =&gt; <span class="variable">$role</span>, <span class="string">&quot;content&quot;</span> =&gt; <span class="variable">$row</span>-&gt;text);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加新的用户对话到对话历史中</span></span><br><span class="line">        <span class="variable">$messages</span>[] = <span class="keyword">array</span>(<span class="string">&quot;role&quot;</span> =&gt; <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span> =&gt; <span class="variable">$question</span>);</span><br><span class="line">        <span class="variable">$payload</span> = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&quot;message&quot;</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">                <span class="string">&quot;text&quot;</span> =&gt; <span class="variable">$messages</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="variable">$json_string</span> = <span class="title function_ invoke__">json_encode</span>(</span><br><span class="line">            <span class="keyword">array</span>(</span><br><span class="line">                <span class="string">&quot;header&quot;</span> =&gt; <span class="variable">$header</span>,</span><br><span class="line">                <span class="string">&quot;parameter&quot;</span> =&gt; <span class="variable">$parameter</span>,</span><br><span class="line">                <span class="string">&quot;payload&quot;</span> =&gt; <span class="variable">$payload</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$json_string</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//鉴权方法</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">assembleAuthUrl</span>(<span class="params"><span class="variable">$method</span>, <span class="variable">$addr</span>, <span class="variable">$apiKey</span>, <span class="variable">$apiSecret</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$apiKey</span> == <span class="string">&quot;&quot;</span> &amp;&amp; <span class="variable">$apiSecret</span> == <span class="string">&quot;&quot;</span>) &#123; <span class="comment">// 不鉴权</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable">$addr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$ul</span> = <span class="title function_ invoke__">parse_url</span>(<span class="variable">$addr</span>); <span class="comment">// 解析地址</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$ul</span> === <span class="literal">false</span>) &#123; <span class="comment">// 地址不对，也不鉴权</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable">$addr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$timestamp</span> = <span class="title function_ invoke__">time</span>();</span><br><span class="line">        <span class="variable">$rfc1123_format</span> = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;D, d M Y H:i:s \G\M\T&quot;</span>, <span class="variable">$timestamp</span>);</span><br><span class="line">        <span class="variable">$signString</span> = <span class="keyword">array</span>(<span class="string">&quot;host: &quot;</span> . <span class="variable">$ul</span>[<span class="string">&quot;host&quot;</span>], <span class="string">&quot;date: &quot;</span> . <span class="variable">$rfc1123_format</span>, <span class="variable">$method</span> . <span class="string">&quot; &quot;</span> . <span class="variable">$ul</span>[<span class="string">&quot;path&quot;</span>] . <span class="string">&quot; HTTP/1.1&quot;</span>);</span><br><span class="line">        <span class="variable">$sgin</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&quot;\n&quot;</span>, <span class="variable">$signString</span>);</span><br><span class="line">        <span class="comment">// print( $sgin);</span></span><br><span class="line"></span><br><span class="line">        <span class="variable">$sha</span> = <span class="title function_ invoke__">hash_hmac</span>(<span class="string">&#x27;sha256&#x27;</span>, <span class="variable">$sgin</span>, <span class="variable">$apiSecret</span>, <span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//print(&quot;signature_sha:\n&quot;);</span></span><br><span class="line">        <span class="comment">//print($sha);</span></span><br><span class="line">        <span class="variable">$signature_sha_base64</span> = <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$sha</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将API密钥、算法、头部信息和签名结果拼接成一个授权URL</span></span><br><span class="line">        <span class="variable">$authUrl</span> = <span class="string">&quot;api_key=\&quot;<span class="subst">$apiKey</span>\&quot;, algorithm=\&quot;hmac-sha256\&quot;, headers=\&quot;host date request-line\&quot;, signature=\&quot;<span class="subst">$signature_sha_base64</span>\&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对授权URL进行Base64编码，并添加到原始地址后面作为查询参数</span></span><br><span class="line">        <span class="variable">$authAddr</span> = <span class="variable">$addr</span> . <span class="string">&#x27;?&#x27;</span> . <span class="title function_ invoke__">http_build_query</span>(</span><br><span class="line">            <span class="keyword">array</span>(</span><br><span class="line">                <span class="string">&#x27;host&#x27;</span> =&gt; <span class="variable">$ul</span>[<span class="string">&#x27;host&#x27;</span>],</span><br><span class="line">                <span class="string">&#x27;date&#x27;</span> =&gt; <span class="variable">$rfc1123_format</span>,</span><br><span class="line">                <span class="string">&#x27;authorization&#x27;</span> =&gt; <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$authUrl</span>),</span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$authAddr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</div>
+        
+          <div class="post-copyright">
+                  <div class="copyright-item">
+                      <span> Author: Gina</span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> Link: <a href="https://yaogina.github.io/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/">https://yaogina.github.io/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/</a></span>
+                  </div>
+                  <div class="copyright-item">
+                      <span> License: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
+                  </div>
+          </div>
+        
+  </div>
+
+  <div class="share-reward">
+    <div class="share">
+        
+<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
+
+
+      </div>
+        <div class="reward">
+          
+        </div>
+    </div>
+    
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/NLP/" class="tag">NLP</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/PHP/" class="tag">PHP</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/api/" class="tag">api</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/gpt/" class="tag">gpt</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E8%AE%AF%E9%A3%9E%E6%98%9F%E7%81%AB%E5%A4%A7%E6%A8%A1%E5%9E%8B/" class="tag">讯飞星火大模型</a>
+      
+    </div>
+    <div class="post-nav">
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/gina511.github.io/2024/03/24/Windows%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAchinese-llama-alpaca-13B%E8%BF%87%E7%A8%8B/" >本地llama.cpp搭建中文llama-alpaca-13B模型记录<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+  <div id="valine"></div>
+  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+        new Valine({
+          el: '#valine',
+          appId: "",
+          appKey: "",
+          avatar: "mm",
+          lang: "",
+          meta: 'nick,mail,link'.split(','),
+          requiredFields: 'nick,mail'.split(','),
+          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
+          pageSize:'10',
+          recordIP: 'false',
+          serverURLs: "",
+          emojiCDN: "",
+          enableQQ: "true",
+        });
+  </script>
+  
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    
+<div id="bottom-outer">
+    <div id="bottom-inner">
+        © 2020 <i class="fa fa-heart" id="heart"></i> Gina 
+        <br>
+        Powered by 
+        <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/">blank</a>
+        
+          <div class="icp-info">
+            
+          <a href="" target="_blank"> </a>
+        </div>
+        
+    </div>  
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/gina511.github.io/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+  <script>
+    jQuery(document).ready(function () {
+      var QRBox = $('#QRBox');
+      var MainBox = $('#MainBox');
+      var AliPayQR = '';
+      var WeChanQR = '';
+
+      function showQR(QR) {
+        if (QR) {
+          MainBox.css('background-image', 'url(' + QR + ')');
+        }
+        $('#donateBox').addClass('blur');
+        QRBox.fadeIn(300, function (argument) {
+          MainBox.addClass('showQR');
+        });
+      }
+
+      $('#donateBox>li').click(function (event) {
+        var thisID = $(this).attr('id');
+        if (thisID === 'AliPay') {
+          showQR(AliPayQR);
+        } else if (thisID === 'WeChat') {
+          showQR(WeChanQR);
+        }
+      });
+
+      MainBox.click(function (event) {
+        MainBox.removeClass('showQR').addClass('hideQR');
+        setTimeout(function (a) {
+          QRBox.fadeOut(300, function (argument) {
+            MainBox.removeClass('hideQR');
+          });
+          $('#DonateText,#donateBox,#github').removeClass('blur');
+        }, 600);
+
+      });
+    });
+  </script>
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+
+</html>
