@@ -179,38 +179,36 @@
 </header>
 
     
-
-  <div id="recent-posts">
+<article id="post">
+  <div class="post-title">(no title)</div>
+  
+<div class="post-meta">
     
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/gina511.github.io/2024/04/17/%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/"></a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="Created 2024.04.17"><i class="far fa-calendar-alt"></i> 2024.04.17</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="Updated 2024.04.17"><i class="far fa-calendar-check"></i> 2024.04.17</span>
-              </div>
-             
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">3.3k words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">11 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <h1 id="Convolutional-Oriented-Boundaries"><a href="#Convolutional-Oriented-Boundaries" class="headerlink" title="Convolutional Oriented Boundaries"></a>Convolutional Oriented Boundaries</h1><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330123925259.png" alt="image-20240330123925259"></p>
+    
+      <div class="post-meta-item date">
+        <span title="Created 2024.04.17"><i class="far fa-calendar-alt"></i> 2024.04.17</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="Updated 2024.04.17"><i class="far fa-calendar-check"></i> 2024.04.17</span>
+      </div>
+     
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">3.3k words</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">11 min</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><h1 id="Convolutional-Oriented-Boundaries"><a href="#Convolutional-Oriented-Boundaries" class="headerlink" title="Convolutional Oriented Boundaries"></a>Convolutional Oriented Boundaries</h1><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330123925259.png" alt="image-20240330123925259"></p>
 <p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
 <h2 id="一、摘要"><a href="#一、摘要" class="headerlink" title="一、摘要"></a>一、摘要</h2><p>​	  面向卷积边界（COB），是一种通用的CNN架构，允许多尺度面向轮廓的<a target="_blank" rel="noopener" href="https://blog.csdn.net/sssssyuan/article/details/104320663#:~:text=%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%B0%B1,%E5%B7%B1%E8%BF%9B%E8%A1%8C%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E3%80%82">端到端学习</a>。可以将性能出色的基础CNN网络转化为高质量的轮廓，将基础CNN架构的未来改进带入语义分组中。并且通过稀疏边界表示方法，有效构建层次化的轮廓信号，实现高效构建轮廓的层次结构。</p>
 <p>​	该技术的特点在于能够高效且精确的进行边界检测和图像分割，同时在看不见的类别和数据集上面也有很强的泛化能力。以及在下游的识别应用方面，也有很大的应用潜力。</p>
@@ -262,236 +260,61 @@
 <p>将side output layer 与每个stage（理解为每一组卷积池化）的最后一层卷积层相连，也就是conv1 2, conv2 2, conv3 3, conv4 3, conv5 3.这些卷积层的感知野尺寸与对应的side-output layer完全相同。（作者在conv1_2, conv2_2, conv3_3, conv4_3,conv5_3后面分别引出，然后接入sigmoid_cross_entropy_loss，并且在最后一层，对上面的5层的输出做了concat，同时也接入sigmoid_cross_entropy_loss，这样所有的Loss都等概率的同时训练，从而使得最终得到比较好的模型。）<br>在卷积层后面侧边插入一个输出层 side-output 层，在side-output层上进行deep supervision，使得结果向着边缘检测方向进行。同时随着side-output层越向后大小的变小，将receptive field变大，最后通过一个weighted-fusion layer得到多尺度下的输出。<br><strong>总结：</strong></p>
 <p>可以看到的是整个过程只有一个卷积+池化的过程，Unet还有上采样的过程，这是不同点；图中的有5个马的图片，从大到小，从浅到深，纹理越来越少，这分别是经过了maxpool和卷积得到的不同尺寸的输出。从图中可以看到，这些输出叫做side-output 1到side-output 5。图中这五个特征图经过虚线，得到了一个Y，这个Y是经过“weighted-fusion”得到了，简单的说就是，五个图经过一个可以训练的权重参数，融合成了最终的输出。</p>
 <h2 id="四、复现效果"><a href="#四、复现效果" class="headerlink" title="四、复现效果"></a>四、复现效果</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240408144537944.png" alt="image-20240408144537944"></p>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
+</div>
         
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/">NLP接口调用记录</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="Created 2024.04.12"><i class="far fa-calendar-alt"></i> 2024.04.12</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="Updated 2024.04.12"><i class="far fa-calendar-check"></i> 2024.04.12</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/NLP/">NLP</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.4k words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">7 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-              <p>又遇到一个项目需要调用gpt，这里就作为一个调用大模型api代码的合集吧，目前只有php代码，真的很喜欢php真的很方便。</p>
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-        <div class="readmore"><a href="/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/">Read More »</a></div>   
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/gina511.github.io/2024/03/24/Windows%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAchinese-llama-alpaca-13B%E8%BF%87%E7%A8%8B/">本地llama.cpp搭建中文llama-alpaca-13B模型记录</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="Created 2024.03.24"><i class="far fa-calendar-alt"></i> 2024.03.24</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="Updated 2024.03.25"><i class="far fa-calendar-check"></i> 2024.03.25</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/NLP/">NLP</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.5k words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">6 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-              <p>参加了个比赛需要调用语言模型对输入文本进行提取与推理，就找到了目前开源的nlp中表现非常出色的llama二次训练增加中文词表后端的alpaca模型（<a target="_blank" rel="noopener" href="https://github.com/ymcui/Chinese-LLaMA-Alpaca?tab=readme-ov-file">项目开源地址</a>）。网上的教程大部分都是对7B的模型，以及官网给的教程我本地跑环境的时候也有问题，这里就浅浅记录一下大概流程。</p>
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-        <div class="readmore"><a href="/gina511.github.io/2024/03/24/Windows%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAchinese-llama-alpaca-13B%E8%BF%87%E7%A8%8B/">Read More »</a></div>   
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/gina511.github.io/2024/03/24/llama%E8%AE%BA%E6%96%87/">中文llama-alpaca论文阅读记录</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="Created 2024.03.24"><i class="far fa-calendar-alt"></i> 2024.03.24</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="Updated 2024.03.26"><i class="far fa-calendar-check"></i> 2024.03.26</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">NLP论文阅读</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">686 words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">2 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-              <h2 id="EFFICIENT-AND-EFFECTIVE-TEXT-ENCODING-FOR-CHINESE-LLAMA-AND-ALPACA"><a href="#EFFICIENT-AND-EFFECTIVE-TEXT-ENCODING-FOR-CHINESE-LLAMA-AND-ALPACA" class="headerlink" title="EFFICIENT AND EFFECTIVE TEXT ENCODING FOR CHINESE LLAMA AND ALPACA"></a>EFFICIENT AND EFFECTIVE TEXT ENCODING FOR CHINESE LLAMA AND ALPACA</h2>
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-        <div class="readmore"><a href="/gina511.github.io/2024/03/24/llama%E8%AE%BA%E6%96%87/">Read More »</a></div>   
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/gina511.github.io/2024/03/10/hello-world/">Hello World</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="Created 2024.03.10"><i class="far fa-calendar-alt"></i> 2024.03.10</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="Updated 2024.03.12"><i class="far fa-calendar-check"></i> 2024.03.12</span>
-              </div>
-             
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">75 words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-              <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-        <div class="readmore"><a href="/gina511.github.io/2024/03/10/hello-world/">Read More »</a></div>   
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/gina511.github.io/2024/02/01/Vue-laravel%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/">Vue+laravel博客开发实战（web建站流程）</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="Created 2024.02.01"><i class="far fa-calendar-alt"></i> 2024.02.01</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="Updated 2024.04.15"><i class="far fa-calendar-check"></i> 2024.04.15</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/web/">web</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.8k words</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">9 min</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-              <p>寒假期间在家里，尝试从0开始不用模板手搓个人博客，这里是一些过程记录，以及最终结果展示。不过还是用hexo 的yilia快速方便。</p>
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-        <div class="readmore"><a href="/gina511.github.io/2024/02/01/Vue-laravel%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/">Read More »</a></div>   
-        
-    </div>
-    
   </div>
 
+  <div class="share-reward">
+    <div class="share">
+        
+<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
 
 
-<nav class="paginator">
+      </div>
+        <div class="reward">
+          
+        </div>
+    </div>
+    
+    <div class="post_tags">
       
-            
-</nav>
+    </div>
+    <div class="post-nav">
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/" >NLP接口调用记录<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+  <div id="valine"></div>
+  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+        new Valine({
+          el: '#valine',
+          appId: "",
+          appKey: "",
+          avatar: "mm",
+          lang: "",
+          meta: 'nick,mail,link'.split(','),
+          requiredFields: 'nick,mail'.split(','),
+          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
+          pageSize:'10',
+          recordIP: 'false',
+          serverURLs: "",
+          emojiCDN: "",
+          enableQQ: "true",
+        });
+  </script>
+  
+
+</article>
 
     
 <a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
@@ -566,6 +389,45 @@
 
 
 
+  <script>
+    jQuery(document).ready(function () {
+      var QRBox = $('#QRBox');
+      var MainBox = $('#MainBox');
+      var AliPayQR = '';
+      var WeChanQR = '';
+
+      function showQR(QR) {
+        if (QR) {
+          MainBox.css('background-image', 'url(' + QR + ')');
+        }
+        $('#donateBox').addClass('blur');
+        QRBox.fadeIn(300, function (argument) {
+          MainBox.addClass('showQR');
+        });
+      }
+
+      $('#donateBox>li').click(function (event) {
+        var thisID = $(this).attr('id');
+        if (thisID === 'AliPay') {
+          showQR(AliPayQR);
+        } else if (thisID === 'WeChat') {
+          showQR(WeChanQR);
+        }
+      });
+
+      MainBox.click(function (event) {
+        MainBox.removeClass('showQR').addClass('hideQR');
+        setTimeout(function (a) {
+          QRBox.fadeOut(300, function (argument) {
+            MainBox.removeClass('hideQR');
+          });
+          $('#DonateText,#donateBox,#github').removeClass('blur');
+        }, 600);
+
+      });
+    });
+  </script>
+  
 
 
 
