@@ -22,7 +22,7 @@
 
   
 
-  <title>Gina</title>
+  <title>计算机视觉边界处理论文阅读记录（COB+HED) | Gina</title>
 
   
 
@@ -180,26 +180,32 @@
 
     
 <article id="post">
-  <div class="post-title">(no title)</div>
+  <div class="post-title">计算机视觉边界处理论文阅读记录（COB+HED)</div>
   
 <div class="post-meta">
     
     
       <div class="post-meta-item date">
-        <span title="Created 2024.04.17"><i class="far fa-calendar-alt"></i> 2024.04.17</span>
+        <span title="Created 2024.04.23"><i class="far fa-calendar-alt"></i> 2024.04.23</span>
       </div>
       <div class="post-meta-item updated">
         <span title="Updated 2024.04.17"><i class="far fa-calendar-check"></i> 2024.04.17</span>
       </div>
      
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/cv%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">cv论文阅读</a>
+        
+      </div>
      
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">3.3k words</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">3.8k words</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">11 min</span>
+          <i class="far fa-clock"></i> <span class="post-count">14 min</span>
                                
       </div>
      
@@ -208,7 +214,9 @@
 
   
   <div class="content">
-        <div><h1 id="Convolutional-Oriented-Boundaries"><a href="#Convolutional-Oriented-Boundaries" class="headerlink" title="Convolutional Oriented Boundaries"></a>Convolutional Oriented Boundaries</h1><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330123925259.png" alt="image-20240330123925259"></p>
+        <div><p>课程要求阅读边界处理论文并记录，就在网上寻找了有github开源的古早边界处理论文，很可惜的是由于对caffe这个架构不太熟悉，导致COB的复现并没有成功实现，但是在寻找资料的时候发现了更广泛使用的HED，并且成功使用Python的opencv包完成复现。</p>
+<span id="more"></span>
+<h1 id="Convolutional-Oriented-Boundaries"><a href="#Convolutional-Oriented-Boundaries" class="headerlink" title="Convolutional Oriented Boundaries"></a>Convolutional Oriented Boundaries</h1><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330123925259.png" alt="image-20240330123925259"></p>
 <p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
 <h2 id="一、摘要"><a href="#一、摘要" class="headerlink" title="一、摘要"></a>一、摘要</h2><p>​	  面向卷积边界（COB），是一种通用的CNN架构，允许多尺度面向轮廓的<a target="_blank" rel="noopener" href="https://blog.csdn.net/sssssyuan/article/details/104320663#:~:text=%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%B0%B1,%E5%B7%B1%E8%BF%9B%E8%A1%8C%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E3%80%82">端到端学习</a>。可以将性能出色的基础CNN网络转化为高质量的轮廓，将基础CNN架构的未来改进带入语义分组中。并且通过稀疏边界表示方法，有效构建层次化的轮廓信号，实现高效构建轮廓的层次结构。</p>
 <p>​	该技术的特点在于能够高效且精确的进行边界检测和图像分割，同时在看不见的类别和数据集上面也有很强的泛化能力。以及在下游的识别应用方面，也有很大的应用潜力。</p>
@@ -260,6 +268,9 @@
 <p>将side output layer 与每个stage（理解为每一组卷积池化）的最后一层卷积层相连，也就是conv1 2, conv2 2, conv3 3, conv4 3, conv5 3.这些卷积层的感知野尺寸与对应的side-output layer完全相同。（作者在conv1_2, conv2_2, conv3_3, conv4_3,conv5_3后面分别引出，然后接入sigmoid_cross_entropy_loss，并且在最后一层，对上面的5层的输出做了concat，同时也接入sigmoid_cross_entropy_loss，这样所有的Loss都等概率的同时训练，从而使得最终得到比较好的模型。）<br>在卷积层后面侧边插入一个输出层 side-output 层，在side-output层上进行deep supervision，使得结果向着边缘检测方向进行。同时随着side-output层越向后大小的变小，将receptive field变大，最后通过一个weighted-fusion layer得到多尺度下的输出。<br><strong>总结：</strong></p>
 <p>可以看到的是整个过程只有一个卷积+池化的过程，Unet还有上采样的过程，这是不同点；图中的有5个马的图片，从大到小，从浅到深，纹理越来越少，这分别是经过了maxpool和卷积得到的不同尺寸的输出。从图中可以看到，这些输出叫做side-output 1到side-output 5。图中这五个特征图经过虚线，得到了一个Y，这个Y是经过“weighted-fusion”得到了，简单的说就是，五个图经过一个可以训练的权重参数，融合成了最终的输出。</p>
 <h2 id="四、复现效果"><a href="#四、复现效果" class="headerlink" title="四、复现效果"></a>四、复现效果</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240408144537944.png" alt="image-20240408144537944"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(</span><br><span class="line">    description=<span class="string">&#x27;复现示例&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--input&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;Path to image or video. Skip to capture frames from camera&#x27;</span>, default=<span class="string">&#x27;001.JPG&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--prototxt&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;Path to deploy.prototxt&#x27;</span>, default=<span class="string">&#x27;deploy.prototxt&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--caffemodel&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;Path to hed_pretrained_bsds.caffemodel&#x27;</span>,</span><br><span class="line">                    default=<span class="string">&#x27;hed_pretrained_bsds.caffemodel&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--width&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;Resize input image to a specific width&#x27;</span>, default=<span class="number">500</span>, <span class="built_in">type</span>=<span class="built_in">int</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--height&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;Resize input image to a specific height&#x27;</span>, default=<span class="number">500</span>, <span class="built_in">type</span>=<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CropLayer</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, params, blobs</span>):</span><br><span class="line">        self.xstart = <span class="number">0</span></span><br><span class="line">        self.xend = <span class="number">0</span></span><br><span class="line">        self.ystart = <span class="number">0</span></span><br><span class="line">        self.yend = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getMemoryShapes</span>(<span class="params">self, inputs</span>):</span><br><span class="line">        inputShape, targetShape = inputs[<span class="number">0</span>], inputs[<span class="number">1</span>]</span><br><span class="line">        batchSize, numChannels = inputShape[<span class="number">0</span>], inputShape[<span class="number">1</span>]</span><br><span class="line">        height, width = targetShape[<span class="number">2</span>], targetShape[<span class="number">3</span>]</span><br><span class="line">        <span class="comment"># self.ystart = (inputShape[2] - targetShape[2]) / 2</span></span><br><span class="line">        <span class="comment"># self.xstart = (inputShape[3] - targetShape[3]) / 2</span></span><br><span class="line">        self.ystart = <span class="built_in">int</span>((inputShape[<span class="number">2</span>] - targetShape[<span class="number">2</span>]) / <span class="number">2</span>)</span><br><span class="line">        self.xstart = <span class="built_in">int</span>((inputShape[<span class="number">3</span>] - targetShape[<span class="number">3</span>]) / <span class="number">2</span>)</span><br><span class="line">        self.yend = self.ystart + height</span><br><span class="line">        self.xend = self.xstart + width</span><br><span class="line">        <span class="keyword">return</span> [[batchSize, numChannels, height, width]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, inputs</span>):</span><br><span class="line">        <span class="keyword">return</span> [inputs[<span class="number">0</span>][:, :, self.ystart:self.yend, self.xstart:self.xend]]</span><br><span class="line"><span class="comment"># ! [CropLayer]</span></span><br><span class="line"><span class="comment"># ! [Register]</span></span><br><span class="line">cv.dnn_registerLayer(<span class="string">&#x27;Crop&#x27;</span>, CropLayer)</span><br><span class="line"><span class="comment"># ! [Register]</span></span><br><span class="line"><span class="comment"># Load the model.</span></span><br><span class="line">net = cv.dnn.readNet(cv.samples.findFile(args.prototxt), cv.samples.findFile(args.caffemodel))</span><br><span class="line">kWinName = <span class="string">&#x27;Holistically-Nested Edge Detection&#x27;</span></span><br><span class="line">cv.namedWindow(<span class="string">&#x27;Input&#x27;</span>, cv.WINDOW_NORMAL)</span><br><span class="line">cv.namedWindow(kWinName, cv.WINDOW_NORMAL)</span><br><span class="line">frame = cv.imread(<span class="string">&#x27;001.JPG&#x27;</span>)</span><br><span class="line">cv.imshow(<span class="string">&#x27;Input&#x27;</span>, frame)</span><br><span class="line"><span class="comment"># cv.waitKey(0)</span></span><br><span class="line">inp = cv.dnn.blobFromImage(frame, scalefactor=<span class="number">1.0</span>, size=(args.width, args.height),</span><br><span class="line">                           mean=(<span class="number">104.00698793</span>, <span class="number">116.66876762</span>, <span class="number">122.67891434</span>),</span><br><span class="line">                           swapRB=<span class="literal">False</span>, crop=<span class="literal">False</span>)</span><br><span class="line">net.setInput(inp)</span><br><span class="line">out = net.forward()</span><br><span class="line">out = out[<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">out = cv.resize(out, (frame.shape[<span class="number">1</span>], frame.shape[<span class="number">0</span>]))</span><br><span class="line">cv.imshow(kWinName, out)</span><br><span class="line">cv.imwrite(<span class="string">&#x27;result.png&#x27;</span>, out)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>加载的模型大概50M。</p>
 </div>
         
   </div>
@@ -280,12 +291,20 @@
     
     <div class="post_tags">
       
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/cv/" class="tag">cv</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E5%9B%BE%E7%89%87%E8%BE%B9%E7%95%8C%E6%A3%80%E6%B5%8B/" class="tag">图片边界检测</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/HED/" class="tag">HED</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/COB/" class="tag">COB</a>
+      
     </div>
     <div class="post-nav">
       
       
         <div class="post-nav-next post-nav-item">
-            <a href="/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/" >NLP接口调用记录<i class="fa fa-chevron-right"></i></a>
+            <a href="/gina511.github.io/2024/04/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%86%B3%E7%AD%96%E6%A0%91/" >基于ID3算法和后剪枝的决策树实验<i class="fa fa-chevron-right"></i></a>
         </div>
       
     </div>

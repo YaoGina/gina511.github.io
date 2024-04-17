@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/gina511.github.io/img/favicon.png">
+  
+  
+      <meta name="author" content="Gina">
+  
+  
+  
+  
+  
+    <link rel="alternate" href="/gina511.github.io/atom.xml " title="Gina" type="application/atom+xml">
+  
+
+  
+
+  <title>基于ID3算法和后剪枝的决策树实验 | Gina</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/gina511.github.io/css/style.css" >
+  <link rel="stylesheet" href="/gina511.github.io/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/gina511.github.io/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/gina511.github.io/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/gina511.github.io/" title="Gina">Gina</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/ ">
+                            <i class=" fab fa-fort-awesome " style="color: rgb(255 107 107);"></i>
+                            <span class="layui-nav-item-name">首页</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">列表</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/tags ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/profile/湖南大学人工智能专业姚姬娜.pdf ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/link/ ">
+                            <i class=" fab fa-weixin " style="color: hsl(152deg 73% 45%);"></i>
+                            <span class="layui-nav-item-name">友链</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/gina511.github.io/shuoshuo/ ">
+                            <i class=" fas fa-coffee " style="color:#31c7c1;"></i>
+                            <span class="layui-nav-item-name">说说</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/gina511.github.io/"><img src="img/header.png" onerror=this.onerror=null,this.src="/gina511.github.io/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>为你，千千万万遍</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://yaogina.github.io/gina511.github.io/" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="gina2021@hnu.edu.cn" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">基于ID3算法和后剪枝的决策树实验</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="Created 2024.04.23"><i class="far fa-calendar-alt"></i> 2024.04.23</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="Updated 2024.04.17"><i class="far fa-calendar-check"></i> 2024.04.17</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">3.4k words</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">13 min</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><h1 id="机器学习决策树"><a href="#机器学习决策树" class="headerlink" title="机器学习决策树"></a>机器学习决策树</h1><h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>机器学习要求使用一个六属性，1000条数据的car数据集建立决策树，这里记录手搓决策树代码实现以及一些性能度量和个人感悟。</p>
+<span id="more"></span>
+
+<h3 id="一、实验结论"><a href="#一、实验结论" class="headerlink" title="一、实验结论"></a>一、实验结论</h3><p><strong>决策树（未剪枝）</strong></p>
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/decision_tree.png" alt="decision_tree" style="zoom:150%;" />
+
+<p>这里是使用自己的决策树建立方法建立的决策树，在训练集占比为0.8并且分层划分决策树中第一轮生成的决策树的可视化图像。这张图片中的决策树并未使用剪枝算法，但是由于使用信息增益建树，而在建树过程中就写了逻辑如果信息增益为0就直接划分成叶节点，所以这里也算是进行了一个小小的预剪枝，所以树枝并不会完全划分六个属性。</p>
+<p><strong>决策树（剪枝，信息增益阈值设置0.2）</strong></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/after_cut_dt.png" alt="after_cut_dt"></p>
+<p>使用后剪枝方法对已经生成的决策树进行剪枝，剪枝按照信息增益来设置,如果信息增益低于某个设定好的阈值，就会将改属性改成叶节点，叶节点的选择按照原本属性划分中最多的标记数赋值，并且使用递归剪枝，能够多层剪枝，这里图像输出时设置的剪枝阈值为0.2，所以减去了较多分支，生成的决策树也比较简单。</p>
+<p><strong>决策树（sklearn库方法）</strong></p>
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/sklearntree.png" alt="sklearntree" style="zoom:50%;" />
+
+<p>不同数据集分层划分，获得四个标记的<strong>查准率，查全率，准确率，F1以及平均值曲线</strong></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/prf1sa.png" alt="prf1sa"></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/image-20240411212718858.png" alt="image-20240411212718858"></p>
+<p>观察上图，0.8划分的性能中，使用sklearn输出<strong>pr曲线</strong></p>
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/image-20240411195041609.png" alt="image-20240411195041609" style="zoom:80%;" />
+
+<p>使用sklearn对性能进行评测。<br>图一是使用sklearn随机划分训练集测试集，后剪枝后生成的决策树。<br>图二是根据不同的训练集划分占比，计算分层抽样生成决策树10次平均的查准率，查全率，F 1，准确度，以及这几者平均值的曲线<br>图三是找到性能最好的训练集划分比例，绘制出的pr曲线</p>
+<h3 id="二、具体实现"><a href="#二、具体实现" class="headerlink" title="二、具体实现"></a>二、具体实现</h3><h4 id="1-信息增益建树"><a href="#1-信息增益建树" class="headerlink" title="1.信息增益建树"></a>1.信息增益建树</h4><p><strong>树节点定义</strong></p>
+<p>记录本节点的分类属性，本节点的具体值，标记值，以及该节点的子节点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, attribute=<span class="literal">None</span>, value=<span class="literal">None</span>, label=<span class="literal">None</span></span>):</span><br><span class="line">        self.attribute = attribute</span><br><span class="line">        self.value = value</span><br><span class="line">        self.label = label</span><br><span class="line">        self.children = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>信息熵计算</strong></p>
+<p>从数据集里读取最后一列的标记，然后计数总共有多少标记，之后通过<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/image-20240409235857464.png" alt="image-20240409235857464" style="zoom: 67%;" />公式计算返回信息熵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">entropy</span>(<span class="params">data</span>):</span><br><span class="line">    labels = [row[-<span class="number">1</span>] <span class="keyword">for</span> row <span class="keyword">in</span> data]</span><br><span class="line">    label_counts = Counter(labels)</span><br><span class="line">    entropy = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> label <span class="keyword">in</span> label_counts:</span><br><span class="line">        label_prob = label_counts[label] / <span class="built_in">len</span>(labels)</span><br><span class="line">        entropy += -label_prob * math.log2(label_prob)</span><br><span class="line">    <span class="keyword">return</span> entropy</span><br></pre></td></tr></table></figure>
+
+<p><strong>信息增益计算</strong></p>
+<p>根据给定的属性计算数据集的信息增益。数据集和属性作为参数。根据属性的索引找到数据集中对应的属性列。然后，提取该属性列中的不同取值,然后开始计算信息熵，获得信息熵之后，用原本的信息熵减去以这个属性划分之后的信息熵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">information_gain</span>(<span class="params">data, attribute</span>):</span><br><span class="line">    attribute_index = attribute_names.index(attribute)</span><br><span class="line">    attribute_values = <span class="built_in">set</span>([row[attribute_index] <span class="keyword">for</span> row <span class="keyword">in</span> data])</span><br><span class="line">    subset_entropy = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> attribute_values:</span><br><span class="line">        subset = [row <span class="keyword">for</span> row <span class="keyword">in</span> data <span class="keyword">if</span> row[attribute_index] == value]</span><br><span class="line">        subset_entropy += <span class="built_in">len</span>(subset) / <span class="built_in">len</span>(data) * entropy(subset)</span><br><span class="line">    <span class="keyword">return</span> entropy(data) - subset_entropy</span><br></pre></td></tr></table></figure>
+
+<p><strong>建树</strong></p>
+<p>检查标签列表中是否只有一个<strong>唯一的标签值</strong>。如果是，则创建一个叶节点，将该标签值作为节点的标签.</p>
+<p>如果<strong>属性列表为空</strong>，则计算标签列表中出现频率最高的标签，并创建叶节点，返回该节点作为树的一个分支。</p>
+<p>选择<strong>最佳属性</strong>，使用信息增益函数计算得到的。信息增益越大，意味着选择该属性可以使得样本的分类更加纯净.创建节点，将最佳属性作为节点的属性，根据最佳属性在数据集中的位置，提取该属性的所有可能取值，并遍历每个取值.针对每个取值，根据属性值将数据集分割为子集。如果子集为空，说明该取值在当前属性下没有样本，创建一个叶节点，并将出现频率最高的标签作为节点的标签。如果子集不为空，说明该取值在当前属性下有样本。创建一个新的属性列表，移除最佳属性，剩下的属性存储在 remaining_attributes 列表中。</p>
+<p>之后递归调用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">build_tree</span>(<span class="params">data, attributes</span>):</span><br><span class="line">    labels = [row[-<span class="number">1</span>] <span class="keyword">for</span> row <span class="keyword">in</span> data]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">set</span>(labels)) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> Node(label=labels[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(attributes) == <span class="number">0</span>:</span><br><span class="line">        majority_label = Counter(labels).most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> Node(label=majority_label)</span><br><span class="line">    best_attribute = <span class="built_in">max</span>(attributes, key=<span class="keyword">lambda</span> attr: information_gain(data, attr))</span><br><span class="line">    node = Node(attribute=best_attribute)</span><br><span class="line">    attribute_index = attribute_names.index(best_attribute)</span><br><span class="line">    attribute_values = <span class="built_in">set</span>([row[attribute_index] <span class="keyword">for</span> row <span class="keyword">in</span> data])</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> attribute_values:</span><br><span class="line">        subset = [row <span class="keyword">for</span> row <span class="keyword">in</span> data <span class="keyword">if</span> row[attribute_index] == value]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(subset) == <span class="number">0</span>:</span><br><span class="line">            majority_label = Counter(labels).most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            node.children[value] = Node(label=majority_label)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            remaining_attributes = [attr <span class="keyword">for</span> attr <span class="keyword">in</span> attributes <span class="keyword">if</span> attr != best_attribute]</span><br><span class="line">            node.children[value] = build_tree(subset, remaining_attributes)</span><br><span class="line">    <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-后剪枝"><a href="#2-后剪枝" class="headerlink" title="2.后剪枝"></a>2.后剪枝</h4><p>生成决策树后，设置信息增益阈值剪枝。</p>
+<p>首先检查当前节点是否有子节点，如果没有子节点，则直接返回。在遍历完所有子节点后，计算当前节点的信息增益，判断当前节点的子节点的标签是否一致，或者当前节点的信息增益是否小于设定的阈值。如果子节点的标签一致或者信息增益小于阈值，则进行剪枝操作。将当前节点的所有子节点合并为一个叶节点，该叶节点的标签值为当前节点子节点中出现频率最高的标签值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Nodes before pruning: 45, Nodes after pruning: 27</span><br><span class="line">Nodes before pruning: 87, Nodes after pruning: 76</span><br><span class="line">Nodes before pruning: 130, Nodes after pruning: 86</span><br><span class="line">Nodes before pruning: 161, Nodes after pruning: 161</span><br><span class="line">Nodes before pruning: 171, Nodes after pruning: 110</span><br><span class="line">Nodes before pruning: 187, Nodes after pruning: 187</span><br><span class="line">Nodes before pruning: 191, Nodes after pruning: 191</span><br><span class="line">Nodes before pruning: 230, Nodes after pruning: 230</span><br><span class="line">Nodes before pruning: 239, Nodes after pruning: 239</span><br></pre></td></tr></table></figure>
+
+<p>这里每个输出是按照不同的训练集比例划分，比例为<img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240411191301595.png" alt="image-20240411191301595" style="zoom:50%;" /><br>可以看到随着训练集比例不断增加，建立的树节点也越多，剪枝剪去的节点数目也越多。而训练集比例越大，节点越多，也越不好剪枝，因为拆出来的训练数据纯度也会越低。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">postorder_prune</span>(<span class="params">node</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node.children:</span><br><span class="line">            <span class="keyword">return</span>        </span><br><span class="line">        <span class="keyword">for</span> child <span class="keyword">in</span> node.children.values():</span><br><span class="line">            postorder_prune(child)</span><br><span class="line">        node.gain = information_gain(validation_data, node.attribute)</span><br><span class="line">        <span class="keyword">if</span> is_label_consistent(node, validation_data) <span class="keyword">or</span> node.gain &lt;= gain_threshold:</span><br><span class="line">            merge_subtree(node)   </span><br><span class="line">    num_nodes_before_pruning = count_nodes(tree)</span><br><span class="line">    postorder_prune(tree)</span><br><span class="line">    num_nodes_after_pruning = count_nodes(tree)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Nodes before pruning: <span class="subst">&#123;num_nodes_before_pruning&#125;</span>, Nodes after pruning: <span class="subst">&#123;num_nodes_after_pruning&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>合并函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">merge_subtree</span>(<span class="params">node</span>):</span><br><span class="line">       node.label = Counter([row[-<span class="number">1</span>] <span class="keyword">for</span> row <span class="keyword">in</span> validation_data]).most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">       node.children = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-可视化"><a href="#3-可视化" class="headerlink" title="3.可视化"></a>3.可视化</h4><p>检查当前节点是否为叶节点。</p>
+<ul>
+<li><p>是，将当前节点添加到图中，标签为取值。</p>
+</li>
+<li><p>否，将当前节点添加到图中，标签为属性。</p>
+</li>
+<li><p>添加从当前节点到子节点的有向边，边的标签为子节点的取值。</p>
+</li>
+</ul>
+<p>递归调用”visualize_tree”函数，将子节点作为参数，以便绘制子节点的子树。最后返回绘制完成的图。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">visualize_tree</span>(<span class="params">node, graph=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">if</span> graph <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        graph = graphviz.Digraph()   </span><br><span class="line">    <span class="keyword">if</span> node.label <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        graph.node(<span class="built_in">str</span>(<span class="built_in">id</span>(node)), label=node.label, shape=<span class="string">&#x27;box&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        graph.node(<span class="built_in">str</span>(<span class="built_in">id</span>(node)), label=node.attribute)    </span><br><span class="line">    <span class="keyword">for</span> value, child <span class="keyword">in</span> node.children.items():</span><br><span class="line">        <span class="keyword">if</span> child.label <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            graph.node(<span class="built_in">str</span>(<span class="built_in">id</span>(child)), label=child.label, shape=<span class="string">&#x27;box&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            graph.node(<span class="built_in">str</span>(<span class="built_in">id</span>(child)), label=child.attribute)</span><br><span class="line">        graph.edge(<span class="built_in">str</span>(<span class="built_in">id</span>(node)), <span class="built_in">str</span>(<span class="built_in">id</span>(child)), label=value)</span><br><span class="line">        visualize_tree(child, graph)   </span><br><span class="line">    <span class="keyword">return</span> graph</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/after_cut_dt.png" alt="after_cut_dt"></p>
+<h4 id="4-评估决策树"><a href="#4-评估决策树" class="headerlink" title="4.评估决策树"></a>4.评估决策树</h4><h5 id="1-分层抽样"><a href="#1-分层抽样" class="headerlink" title="1.分层抽样"></a>1.分层抽样</h5><p>使用sklearn库函数 StratifiedShuffleSplit，对数据集的划分进行分层抽样和交叉验证。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sss = StratifiedShuffleSplit(n_splits=num_train, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/image-20240411164801620.png" alt="image-20240411164801620" style="zoom:80%;" />
+
+<h5 id="2-交叉验证"><a href="#2-交叉验证" class="headerlink" title="2.交叉验证"></a>2.交叉验证</h5><p>使用sklearn库中StratifiedShuffleSplit的split方法，交叉验证的迭代，在每次迭代中，将数据集划分为训练集和测试集的索引。</p>
+<p>之后就正常的按照索引划分数据集，建立决策树，然后计算性能指标，最后算出平均值。由于上面调用函数的时候num_train是10，所以会进行十次洗牌划分数据集，相当于计算十次建树最后得到的性能指标的平均值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> train_index, test_index <span class="keyword">in</span> sss.split(X, y):</span><br><span class="line">    train_data = data[train_index]</span><br><span class="line">    test_data = data[test_index]</span><br><span class="line">    tree = build_tree(train_data, attribute_names)</span><br><span class="line">    post_pruning(tree, validation_data=test_data, gain_threshold=<span class="number">0.01</span>)</span><br><span class="line">    y_true, y_pred = get_classification_results(tree, test_data)</span><br><span class="line">    precision = precision_score(y_true, y_pred, average=<span class="string">&#x27;macro&#x27;</span>)</span><br><span class="line">    recall = recall_score(y_true, y_pred, average=<span class="string">&#x27;macro&#x27;</span>)</span><br><span class="line">    f1_score = f1_score(y_true, y_pred, average=<span class="string">&#x27;macro&#x27;</span>)</span><br><span class="line">    accuracy = accuracy_score(y_true, y_pred)</span><br><span class="line">    precision_list.append(precision)</span><br><span class="line">    recall_list.append(recall)</span><br><span class="line">    f1_score_list.append(f1_score)</span><br><span class="line">    accuracy_list.append(accuracy)</span><br><span class="line">avg_precision = np.mean(precision_list)</span><br><span class="line">avg_recall = np.mean(recall_list)</span><br><span class="line">avg_f1_score = np.mean(f1_score_list)</span><br><span class="line">avg_accuracy = np.mean(accuracy_list)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-性能指标计算公式"><a href="#3-性能指标计算公式" class="headerlink" title="3.性能指标计算公式"></a>3.性能指标计算公式</h5><p>正常遍历测试集，获得决策树对测试集的预测结果，根据结果计算预测正确错误的相关标记个数。根据这些个数计算查准率，查全率，f1,和正确性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, instance <span class="keyword">in</span> <span class="built_in">enumerate</span>(test_data):</span><br><span class="line">       predicted_label = classify_instance(instance, tree)</span><br><span class="line">       actual_label = instance[-<span class="number">1</span>]</span><br><span class="line">       <span class="keyword">if</span> predicted_label == actual_label:</span><br><span class="line">           true_positives += <span class="number">1</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           <span class="keyword">if</span> predicted_label <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">               false_positives += <span class="number">1</span></span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               false_negatives += <span class="number">1</span></span><br><span class="line">   </span><br><span class="line">   precision = true_positives / (true_positives + false_positives)</span><br><span class="line">   recall = true_positives / (true_positives + false_negatives)</span><br><span class="line">   f1_score = <span class="number">2</span> * (precision * recall) / (precision + recall)</span><br><span class="line">   accuracy = true_positives / test_size</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-性能图像"><a href="#4-性能图像" class="headerlink" title="4.性能图像"></a>4.性能图像</h5><p>为了观测不同训练集与测试集划分比例对结构的影响，设置不同划分比例，之后输出性能图像，获得如下图像。该图像为十次洗牌按照训练集0.8，分层划分数据集，得到的查准率，查全，准确，f1和四者平均值的的曲线图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train_ratios = [<span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>, <span class="number">0.7</span>, <span class="number">0.8</span>, <span class="number">0.9</span>]</span><br><span class="line">results = []</span><br><span class="line"><span class="keyword">for</span> train_ratio <span class="keyword">in</span> train_ratios:</span><br><span class="line">    precision, recall, f1_score, accuracy = evaluate_decision_tree(data, attribute_names, train_ratio)</span><br><span class="line">    results.append((train_ratio, precision, recall, f1_score, accuracy))</span><br></pre></td></tr></table></figure>
+
+<p>根据图像可以得知，当训练集占0.8时，得到的决策树性能平均表现较好，所以后续选择测试在训练集占比0.8时，尝试画出pr曲线图。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/prf1sa.png" alt="prf1sa"></p>
+<h5 id="5-pr曲线图"><a href="#5-pr曲线图" class="headerlink" title="5.pr曲线图"></a>5.pr曲线图</h5><img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240411195047737.png" alt="image-20240411195047737" style="zoom: 80%;" />
+
+<p>由于决策树是一个多分类问题，于是还需要对测试集进行多分类标签二进制化，然后调用precision_recall_curve这个函数，对测试集正确结果和预测结果进行匹配，计算出查准率，查全率等等，然后绘制图像。得到的图像如上图，然后再计算出折线面积，输出不同属性的pr曲线面积，根据面积评判决策树性能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y_pred = tree_classifier.predict(X_test)</span><br><span class="line">y_test_bin = label_binarize(y_test, classes=tree_classifier.classes_)</span><br><span class="line">precision = <span class="built_in">dict</span>()</span><br><span class="line">recall = <span class="built_in">dict</span>()</span><br><span class="line">n_classes = <span class="built_in">len</span>(tree_classifier.classes_)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_classes):</span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test_bin[:, i], tree_classifier.predict_proba(X_test)[:, i])</span><br></pre></td></tr></table></figure>
+
+<p>label_binarize 将多分类标签转换为二进制形式。<br>例如，如果有三个类别 [A, B, C]，那么对于每个样本的标签 [A, B, C, A]，经过 label_binarize 处理后，会转换为二进制形式的数组 [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 0, 0]]，其中每一行表示一个样本的标签是否属于对应类别。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i], marker=<span class="string">&#x27;o&#x27;</span>, label=tag[i])</span><br><span class="line">    area_i = precision[i].mean() * recall[i].mean()</span><br><span class="line">    areas.append(area_i) </span><br><span class="line">    plt.text(<span class="number">0.5</span>, <span class="number">0.05</span>*(i+<span class="number">1</span>), <span class="string">f&#x27;Area(<span class="subst">&#123;tag[i]&#125;</span>): <span class="subst">&#123;area_i:<span class="number">.2</span>f&#125;</span>&#x27;</span>, fontsize=<span class="number">10</span>) </span><br></pre></td></tr></table></figure>
+
+<p>可以看到这里的pr图，能够大概反应pr图像趋势，整体来看，表现最好的是nacc和acc ,其次才是good和vgood，大概分布是符合数据集中的数据分布的。</p>
+<img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240411195133267.png" alt="image-20240411195133267" style="zoom:33%;" />
+
+<h3 id="三、小组性能指标对比"><a href="#三、小组性能指标对比" class="headerlink" title="三、小组性能指标对比"></a>三、小组性能指标对比</h3><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/image-20240417173201331.png" alt="image-20240417173201331"></p>
+<p>这里获得四种策略最佳性能表现对应的训练集&amp;验证集划分比例</p>
+<p>也可以看到随着训练集占比不断增加，决策树整体性能是越来越好的，但性能变化梯度在不断减小，在0.8与0.9之间，性能可能会略有下降。我们认为训练集越多，训练的数据越完善，并且剪枝的概率也会相应减小，于是决策树拥有更多节点准确预测，但是当训练集过多，有些数据对节点的加入帮助并不大，所以梯度会降低，并且训练数据过多可能会出现过拟合的现象。</p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/image-20240417173251175.png" alt="image-20240417173251175"></p>
+<ul>
+<li>unacc 基尼后&gt;ID3预&gt;基尼预&gt;ID3后</li>
+<li>acc    ID3后&gt;基尼后&gt;信息预&gt;基尼预</li>
+<li>good  基尼后&gt;Id3预&gt;Id3后&gt;基尼预</li>
+<li>vgood ID3预&gt;ID3后&gt;基尼后&gt;基尼预</li>
+</ul>
+<p>在尽量控制其他变量相同，发挥基尼指数、信息增益、预剪枝、后剪枝算法排列组合最好性能的时候，输出他们各自pr曲线，按照曲线的面积大小对获得的结果进行排序分析。我们小组认为<br>后剪枝的表现比预剪枝稍好，由于其在生成完整的决策树之后再剪枝，能够充分利用数据集。<br>而ID3的表现也比基尼指数划分属性表现稍好，二者都属于贪心策略建树，但是信息增益使用log函数，其梯度变化更加符合实际过程中的数据趋势。但ID3的计算对比基尼指数也更为复杂，实际应用中因做出取舍。</p>
+<h3 id="四、实验收获"><a href="#四、实验收获" class="headerlink" title="四、实验收获"></a>四、实验收获</h3><p>整体实验完成之后，对决策树的理解更加深入，尤其是递归算法，通过递归算法建树，后剪枝什么的。并且对查准率，查全率，f1和准确率的计算更加熟悉，之前看机器学习论文，在介绍完实现之后都会有一个章节介绍测试结果，当时对这种评价指标没有很多的理解，但是这次实验做完对于机器学习算法评价函数的必要性有很大的认识。</p>
+</div>
+        
+  </div>
+
+  <div class="share-reward">
+    <div class="share">
+        
+<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
+
+
+      </div>
+        <div class="reward">
+          
+        </div>
+    </div>
+    
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" class="tag">决策树</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E5%90%8E%E5%89%AA%E6%9E%9D/" class="tag">后剪枝</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/ID3/" class="tag">ID3</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="tag">机器学习</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/gina511.github.io/2024/04/23/%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/" >计算机视觉边界处理论文阅读记录（COB+HED)<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/" >NLP接口调用记录<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+  <div id="valine"></div>
+  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+        new Valine({
+          el: '#valine',
+          appId: "",
+          appKey: "",
+          avatar: "mm",
+          lang: "",
+          meta: 'nick,mail,link'.split(','),
+          requiredFields: 'nick,mail'.split(','),
+          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
+          pageSize:'10',
+          recordIP: 'false',
+          serverURLs: "",
+          emojiCDN: "",
+          enableQQ: "true",
+        });
+  </script>
+  
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    
+<div id="bottom-outer">
+    <div id="bottom-inner">
+        © 2020 <i class="fa fa-heart" id="heart"></i> Gina 
+        <br>
+        Powered by 
+        <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/">blank</a>
+        
+          <div class="icp-info">
+            
+          <a href="" target="_blank"> </a>
+        </div>
+        
+    </div>  
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/gina511.github.io/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+  <script>
+    jQuery(document).ready(function () {
+      var QRBox = $('#QRBox');
+      var MainBox = $('#MainBox');
+      var AliPayQR = '';
+      var WeChanQR = '';
+
+      function showQR(QR) {
+        if (QR) {
+          MainBox.css('background-image', 'url(' + QR + ')');
+        }
+        $('#donateBox').addClass('blur');
+        QRBox.fadeIn(300, function (argument) {
+          MainBox.addClass('showQR');
+        });
+      }
+
+      $('#donateBox>li').click(function (event) {
+        var thisID = $(this).attr('id');
+        if (thisID === 'AliPay') {
+          showQR(AliPayQR);
+        } else if (thisID === 'WeChat') {
+          showQR(WeChanQR);
+        }
+      });
+
+      MainBox.click(function (event) {
+        MainBox.removeClass('showQR').addClass('hideQR');
+        setTimeout(function (a) {
+          QRBox.fadeOut(300, function (argument) {
+            MainBox.removeClass('hideQR');
+          });
+          $('#DonateText,#donateBox,#github').removeClass('blur');
+        }, 600);
+
+      });
+    });
+  </script>
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+
+</html>

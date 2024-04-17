@@ -184,89 +184,89 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
-            <a href="/gina511.github.io/2024/04/17/%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/"></a>
+            <a href="/gina511.github.io/2024/04/23/%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/">计算机视觉边界处理论文阅读记录（COB+HED)</a>
           </div>
           <div class="post-meta">
             
             
               <div class="post-meta-item date">
-                <span title="Created 2024.04.17"><i class="far fa-calendar-alt"></i> 2024.04.17</span>
+                <span title="Created 2024.04.23"><i class="far fa-calendar-alt"></i> 2024.04.23</span>
               </div>
               <div class="post-meta-item updated">
                 <span title="Updated 2024.04.17"><i class="far fa-calendar-check"></i> 2024.04.17</span>
               </div>
              
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/cv%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">cv论文阅读</a>
+                
+              </div>
              
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">3.3k words</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">3.8k words</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">11 min</span>
+                  <i class="far fa-clock"></i> <span class="post-count">14 min</span>
                                        
               </div>
              
         </div>
           <div class="content">
             
-                  <h1 id="Convolutional-Oriented-Boundaries"><a href="#Convolutional-Oriented-Boundaries" class="headerlink" title="Convolutional Oriented Boundaries"></a>Convolutional Oriented Boundaries</h1><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330123925259.png" alt="image-20240330123925259"></p>
-<p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
-<h2 id="一、摘要"><a href="#一、摘要" class="headerlink" title="一、摘要"></a>一、摘要</h2><p>​	  面向卷积边界（COB），是一种通用的CNN架构，允许多尺度面向轮廓的<a target="_blank" rel="noopener" href="https://blog.csdn.net/sssssyuan/article/details/104320663#:~:text=%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%B0%B1,%E5%B7%B1%E8%BF%9B%E8%A1%8C%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E3%80%82">端到端学习</a>。可以将性能出色的基础CNN网络转化为高质量的轮廓，将基础CNN架构的未来改进带入语义分组中。并且通过稀疏边界表示方法，有效构建层次化的轮廓信号，实现高效构建轮廓的层次结构。</p>
-<p>​	该技术的特点在于能够高效且精确的进行边界检测和图像分割，同时在看不见的类别和数据集上面也有很强的泛化能力。以及在下游的识别应用方面，也有很大的应用潜力。</p>
-<h2 id="二、相关工作对比"><a href="#二、相关工作对比" class="headerlink" title="二、相关工作对比"></a>二、相关工作对比</h2><p>​	Xie和Tu提出了一个端到端的深度框架，利用卷积特征图和新颖的损失函数来提高轮廓检测的效率和准确性。本文的<strong>COB与先前的工作不同之处在于，在单次网络传递整个图像时获取多尺度信息，将像素级分类与轮廓方向估计相结合，其输出比不同尺度上的线性组合更丰富。</strong>并且展示了使用VGGNet和ResNet的结果，表明COB是模块化的，并且可以结合并受益于基础CNN的未来改进。</p>
-<p>​	最近的工作还探索了弱监督或无监督学习轮廓的方法。研究者们利用通用轮廓检测器和目标检测器的结果进行学习，或者从视频序列获取的运动边界训练轮廓检测器。还有一些方法利用条件随机场来修正PASCAL数据集中轮廓边界的定位不准确的问题。与这些方法不同，<strong>COB利用轮廓检测和分割层次之间的对偶性，通过稀疏边界表示实现了高效的分割，同时利用CNN的高级知识来估计轮廓强度和方向，自然地受益于全局信息，避免了计算成本较高的全局化步骤。</strong> 此外，COB的方法还利用了由Najman和Schmitt最初研究的轮廓检测和分割层次之间的关系。先前的研究已经证明了这种方法在同时优化轮廓和区域时的有效性，并且利用多分辨率轮廓检测对对象提案的生成也非常有帮助。与这些方法不同的是，<strong>COB的稀疏边界表示能够实现干净高效的分割实现，而且通过利用CNN在轮廓强度和方向估计中的高级知识，自然地受益于全局信息，避免了计算成本高的全局化步骤的瓶颈问题</strong>。</p>
-<h2 id="三、具体实现"><a href="#三、具体实现" class="headerlink" title="三、具体实现"></a>三、具体实现</h2><h3 id="1-深度多尺度定向轮廓（Deep-Multiscale-Oriented-contour）"><a href="#1-深度多尺度定向轮廓（Deep-Multiscale-Oriented-contour）" class="headerlink" title="1.深度多尺度定向轮廓（Deep Multiscale Oriented contour）"></a>1.深度多尺度定向轮廓（Deep Multiscale Oriented contour）</h3><p>​		CNN由于其卷积和空间池化层的构造，天然具备多尺度特征提取的能力。随着网络层次的加深，特征图对于全局信息的获取能力增强，同时精细尺度的轮廓信息在浅层网络中被捕捉到，而深层网络能够获取到更粗糙的空间分辨率和更大的感受野，从而获取更全局的信息以用于预测边界的强度和方向。</p>
-<p>​		<img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330131442311.png" alt="image-20240330131442311"></p>
-<p>​		提出了基于CNN的深度学习架构，用于在多个尺度上检测轮廓和其方向。不同组的特征图包含了不同尺度的信息，这些信息被组合起来构建一个多尺度的有向轮廓检测器。介绍深度学习的轮廓检测方法，以及使用CNN在图像级别进行轮廓检测的架构和边界方向估计方法。训练过程中使用了多个损失函数来监督不同尺度和方向的轮廓检测。</p>
-<p>​		<strong>本文使用多尺度轮廓检测的基本CNN架构</strong>。作者对50层的ResNet进行了微调，<strong>移除了用于分类的全连接层和批量归一化层</strong>。网络主要由卷积层和ReLU激活函数组成，分为5个阶段，每个阶段处理不同的尺度。通过监督每个阶段的输出，获取不同分辨率的中间结果。作者在这个基本CNN的基础上，使用<strong>可训练权重将四个最精细和四个最粗糙尺度的中间结果进行线性组合</strong>，得到精细尺度和粗糙尺度的输出，用于训练多尺度的轮廓检测。 此外，作者还介绍了通过连接到基本网络的K个分支网络来估计轮廓的方向。这些分支网络在不同尺度的中间卷积层上进行操作，每个分支网络与一个方向角相关联，并且对该方向下的轮廓像素进行分类。最终，通过将不同方向的反应进行后处理，得到轮廓的方向估计。</p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330132047259.png" alt="image-20240330132047259"></p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330132124828.png" alt="image-20240330132124828"></p>
-<h3 id="2、快速分层区域"><a href="#2、快速分层区域" class="headerlink" title="2、快速分层区域"></a>2、快速分层区域</h3><p><strong>这里主要是介绍如何利用多尺度轮廓和方向构建高效的图像分割算法。</strong></p>
-<p>​		首先引入<a target="_blank" rel="noopener" href="https://blog.csdn.net/HXG2006/article/details/79828532">超度量等高线图</a>的概念，它将轮廓检测概率图转换成了一个分层边界图，当在不同的轮廓强度阈值下进行分割时，得到了不同粒度的分区。然后，介绍了一种替代的图像分区表示方法，可以将多尺度UCM的计算时间降低一个数量级，减少到不到一秒钟。</p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330132734237.png" alt="image-20240330132734237"></p>
-<p>​		图像分区的一种常见表示方法是使用标签矩阵，将像素集合划分为不同的区域。图中显示了一个示例，大小为2×3，共有三个区域。分区的边界是具有不同标签的像素之间的边界元素（用红色突出显示）。这些边界可以具有不同的强度（红线的粗细），表示该边界是否为真实边界的置信度。通过按照递增强度的顺序迭代地擦除这些边界，可以得到不同的分区，即区域层次结构或超度量等高线图。</p>
-<p>​		边界通常存储在边界网格中，边界网格是图像大小的两倍（减一）的矩阵。奇数坐标表示像素（灰色区域），而中间位置表示边界（红色数字）和连接点（交叉位置）。 UCMs使用这种表示方法来存储边界的强度值，即每个边界位置存储着超过该阈值时消失的边缘和邻近的两个区域合并的阈值。因此，通过对UCM进行二值化，可以得到以边界网格表示的分区。</p>
-<p>​		然而，在运行时，这种表示方法在激活边界的百分比非常稀疏时效率非常低。存储这些空边界会浪费内存，并导致在边界网格上进行操作时效率低下，因为需要在整个矩阵上扫描以修改单个边界。于是提出了稀疏边界表示方法。它存储了一张查找表，记录了相邻区域对、它们的边界强度和边界的坐标列表。除了在内存方面更紧凑外，这种表示方法还可以对边界的特定部分进行高效操作，只需要在查找表中搜索并扫描激活的坐标，而不需要整个边界网格。</p>
-<p>​		接下来 从多尺度方向轮廓中快速构建层次结构，最直接的方法是对各个层级进行线性组合，得到一个单一的轮廓信号。本文的方法是将从每个层上提取的区域层次结构组合起来，而不是直接使用轮廓。从不同图像尺度上计算的轮廓中得到UCM，并将其组合成一个单一的层次结构。</p>
-<h2 id="四、实验性能"><a href="#四、实验性能" class="headerlink" title="四、实验性能"></a>四、实验性能</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330133508509.png" alt="image-20240330133508509"></p>
-<p>​		该方法在PASCAL Context和BSDS500数据集上进行轮廓检测和通用图像分割的结果。在VOC训练集上训练后，并在VOC验证集上进行了超参数选择。在使用先前调整过的超参数的情况下，在未见过的VOC测试集上的最终结果。</p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240330133707010.png" alt="image-20240330133707010"></p>
-<p>​			边界测量（Fb）和区域测量（Fop）的精确度-召回曲线，以及ODS、OIS和AP等汇总指标的结果。根据这些结果显示，COB模型在BSDS500数据集上表现出色，接近甚至达到了人类的表现水平。</p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="C:\Users\梧役\AppData\Roaming\Typora\typora-user-images\image-20240330133852657.png" alt="image-20240330133852657"></p>
-<h2 id="四、结论"><a href="#四、结论" class="headerlink" title="四、结论"></a>四、结论</h2><p>​		这篇论文开发了一种在单次前向传递的卷积神经网络中检测多尺度轮廓及其方向的方法。他们提出了一种快速生成区域层次结构的框架，通过高效地组合多尺度定向轮廓检测来实现，这得益于一种新的稀疏边界表示方法。</p>
-<h2 id="五、后续"><a href="#五、后续" class="headerlink" title="五、后续"></a>五、后续</h2><p>​		因为想要尝试把这篇论文的成果复现出来，论文也把项目发到了github上面，但是由于对caffe了解并不深入，复现过程还有很多环境没有配置好，教程也比较少，就放弃了COB的复现。但是在复现工作中，看见了另一种边界处理方法HED的介绍，这种方法教程也比较多，github上面也发了相关的项目。<strong>于是就做了HED的复现，同时也再阅读了一下HED的论文。</strong></p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240407173800663.png" alt="image-20240407173800663"></p>
-<h2 id="一、摘要-1"><a href="#一、摘要-1" class="headerlink" title="一、摘要"></a>一、摘要</h2><p>​		提出整体嵌套的边缘检测（HED）：通过一个利用完全卷积神经网络和深度监督网络的深度学习模型来执行图像到图像的预测。</p>
-<ul>
-<li>整体图像训练和预测</li>
-<li>多尺度、多层次的特征学习</li>
-</ul>
-<h2 id="二、文献综述"><a href="#二、文献综述" class="headerlink" title="二、文献综述"></a>二、文献综述</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240407204340991.png" alt="image-20240407204340991"></p>
-<p>(a)显示了BSD500数据集的一个示例测试图像；(b)显示了其对应的由人体主题注释的边缘(c)显示HED结果。在第二行： (d)、(e)和(f)分别显示了我们卷积神经网络的第2、3和第4层的侧边响应。在第三行： (g)、(h)和(i)分别显示了来自Canny检测器[4]在&#x3D; 2.0、&#x3D; 4.0和&#x3D; 8.0尺度上的边缘响应。</p>
-<p>HED在一致性上比精明有明显的优势。</p>
-<h2 id="三、实现方法"><a href="#三、实现方法" class="headerlink" title="三、实现方法"></a>三、实现方法</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/%5Cimage-20240407210057062.png" alt="image-20240407210057062"></p>
-<ul>
-<li><p>（a）Multi-stream learning 示意图，可以看到图中的平行的网络下，每个网络通过不同参数与receptive field大小的不同，获得多尺度的结果。输入影像是同时进入多个网络处理，得到的特征结果直接反应多尺度,再连接到一个global out layer得到输出。</p>
-</li>
-<li><p>（b）Skip-layer network learning 示意图，该方法主要连接各个单的初始网络流得到特征响应，并将响应结合在一起输出（特点：只有一路network，从不同层提取信息连接到输出）</p>
-</li>
-<li><p>（c）Single model on multiple inputs 示意图（就是不同尺寸的图片输入），单一网络，图像resize方法得到多尺度进行输入，该方法在训练和test过程均可加入。同时在非深度学习中也有广泛应用。</p>
-</li>
-<li><p>（d）Training independent networks ，从（a）演化来，通过多个独立网络分别对<strong>不同深度</strong>和<strong>输出loss</strong>进行多尺度预测，该方法下训练样本量较大（训练多个不同的网络（深度不同且loss也不同），得到多个不同的输出，缺点显然是资源消耗太大。</p>
-</li>
-<li><p>（e）Holistically-nested networks，本文提出的算法结构，从（d）演化来，类似地是一个相互独立多网络多尺度预测系统，但是将multiple side outputs组合成一个单一深度网络。</p>
-</li>
-</ul>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240407210453152.png" alt="image-20240407210453152"></p>
-<p>将side output layer 与每个stage（理解为每一组卷积池化）的最后一层卷积层相连，也就是conv1 2, conv2 2, conv3 3, conv4 3, conv5 3.这些卷积层的感知野尺寸与对应的side-output layer完全相同。（作者在conv1_2, conv2_2, conv3_3, conv4_3,conv5_3后面分别引出，然后接入sigmoid_cross_entropy_loss，并且在最后一层，对上面的5层的输出做了concat，同时也接入sigmoid_cross_entropy_loss，这样所有的Loss都等概率的同时训练，从而使得最终得到比较好的模型。）<br>在卷积层后面侧边插入一个输出层 side-output 层，在side-output层上进行deep supervision，使得结果向着边缘检测方向进行。同时随着side-output层越向后大小的变小，将receptive field变大，最后通过一个weighted-fusion layer得到多尺度下的输出。<br><strong>总结：</strong></p>
-<p>可以看到的是整个过程只有一个卷积+池化的过程，Unet还有上采样的过程，这是不同点；图中的有5个马的图片，从大到小，从浅到深，纹理越来越少，这分别是经过了maxpool和卷积得到的不同尺寸的输出。从图中可以看到，这些输出叫做side-output 1到side-output 5。图中这五个特征图经过虚线，得到了一个Y，这个Y是经过“weighted-fusion”得到了，简单的说就是，五个图经过一个可以训练的权重参数，融合成了最终的输出。</p>
-<h2 id="四、复现效果"><a href="#四、复现效果" class="headerlink" title="四、复现效果"></a>四、复现效果</h2><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/cv-report/image-20240408144537944.png" alt="image-20240408144537944"></p>
-
+              <p>课程要求阅读边界处理论文并记录，就在网上寻找了有github开源的古早边界处理论文，很可惜的是由于对caffe这个架构不太熟悉，导致COB的复现并没有成功实现，但是在寻找资料的时候发现了更广泛使用的HED，并且成功使用Python的opencv包完成复现。</p>
              
           </div>
         </div>
       <div class="post-footer">
+        
+        <div class="readmore"><a href="/gina511.github.io/2024/04/23/%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/">Read More »</a></div>   
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
+            <a href="/gina511.github.io/2024/04/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%86%B3%E7%AD%96%E6%A0%91/">基于ID3算法和后剪枝的决策树实验</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="Created 2024.04.23"><i class="far fa-calendar-alt"></i> 2024.04.23</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="Updated 2024.04.17"><i class="far fa-calendar-check"></i> 2024.04.17</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">3.4k words</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">13 min</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+              <h1 id="机器学习决策树"><a href="#机器学习决策树" class="headerlink" title="机器学习决策树"></a>机器学习决策树</h1><h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>机器学习要求使用一个六属性，1000条数据的car数据集建立决策树，这里记录手搓决策树代码实现以及一些性能度量和个人感悟。</p>
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+        <div class="readmore"><a href="/gina511.github.io/2024/04/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%86%B3%E7%AD%96%E6%A0%91/">Read More »</a></div>   
         
     </div>
     
