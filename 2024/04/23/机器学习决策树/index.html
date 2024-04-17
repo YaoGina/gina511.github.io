@@ -218,21 +218,18 @@
 <span id="more"></span>
 
 <h3 id="一、实验结论"><a href="#一、实验结论" class="headerlink" title="一、实验结论"></a>一、实验结论</h3><p><strong>决策树（未剪枝）</strong></p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/decision_tree.png" alt="decision_tree" style="zoom:150%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/ecision_tree.png" alt="after_cut_dt"></p>
 <p>这里是使用自己的决策树建立方法建立的决策树，在训练集占比为0.8并且分层划分决策树中第一轮生成的决策树的可视化图像。这张图片中的决策树并未使用剪枝算法，但是由于使用信息增益建树，而在建树过程中就写了逻辑如果信息增益为0就直接划分成叶节点，所以这里也算是进行了一个小小的预剪枝，所以树枝并不会完全划分六个属性。</p>
 <p><strong>决策树（剪枝，信息增益阈值设置0.2）</strong></p>
 <p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/after_cut_dt.png" alt="after_cut_dt"></p>
 <p>使用后剪枝方法对已经生成的决策树进行剪枝，剪枝按照信息增益来设置,如果信息增益低于某个设定好的阈值，就会将改属性改成叶节点，叶节点的选择按照原本属性划分中最多的标记数赋值，并且使用递归剪枝，能够多层剪枝，这里图像输出时设置的剪枝阈值为0.2，所以减去了较多分支，生成的决策树也比较简单。</p>
 <p><strong>决策树（sklearn库方法）</strong></p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/sklearntree.png" alt="sklearntree" style="zoom:50%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/sklearntree.png" alt="after_cut_dt"></p>
 <p>不同数据集分层划分，获得四个标记的<strong>查准率，查全率，准确率，F1以及平均值曲线</strong></p>
 <p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/prf1sa.png" alt="prf1sa"></p>
 <p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/image-20240411212718858.png" alt="image-20240411212718858"></p>
 <p>观察上图，0.8划分的性能中，使用sklearn输出<strong>pr曲线</strong></p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/ml-report/image-20240411195041609.png" alt="image-20240411195041609" style="zoom:80%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/ml-report/image-20240411195041609.png" alt="image-20240411212718858"></p>
 <p>使用sklearn对性能进行评测。<br>图一是使用sklearn随机划分训练集测试集，后剪枝后生成的决策树。<br>图二是根据不同的训练集划分占比，计算分层抽样生成决策树10次平均的查准率，查全率，F 1，准确度，以及这几者平均值的曲线<br>图三是找到性能最好的训练集划分比例，绘制出的pr曲线</p>
 <h3 id="二、具体实现"><a href="#二、具体实现" class="headerlink" title="二、具体实现"></a>二、具体实现</h3><h4 id="1-信息增益建树"><a href="#1-信息增益建树" class="headerlink" title="1.信息增益建树"></a>1.信息增益建树</h4><p><strong>树节点定义</strong></p>
 <p>记录本节点的分类属性，本节点的具体值，标记值，以及该节点的子节点</p>
