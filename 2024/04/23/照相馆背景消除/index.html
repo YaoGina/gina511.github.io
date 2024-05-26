@@ -22,7 +22,7 @@
 
   
 
-  <title>Gina</title>
+  <title>Carvana ImageMasking Challenge  [基于UNET的kaggle图像遮蔽挑战] | Gina</title>
 
   
 
@@ -180,18 +180,24 @@
 
     
 <article id="post">
-  <div class="post-title">(no title)</div>
+  <div class="post-title">Carvana ImageMasking Challenge  [基于UNET的kaggle图像遮蔽挑战]</div>
   
 <div class="post-meta">
     
     
       <div class="post-meta-item date">
-        <span title="Created 2024.05.26"><i class="far fa-calendar-alt"></i> 2024.05.26</span>
+        <span title="Created 2024.04.23"><i class="far fa-calendar-alt"></i> 2024.04.23</span>
       </div>
       <div class="post-meta-item updated">
         <span title="Updated 2024.05.26"><i class="far fa-calendar-check"></i> 2024.05.26</span>
       </div>
      
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/cv/">cv</a>
+        
+      </div>
      
     
      <div class="post-meta-item wordcount">
@@ -210,10 +216,14 @@
   <div class="content">
         <div><h1 id="Carvana-ImageMasking-Challenge"><a href="#Carvana-ImageMasking-Challenge" class="headerlink" title="Carvana ImageMasking Challenge"></a>Carvana ImageMasking Challenge</h1><h3 id="一、实验要求"><a href="#一、实验要求" class="headerlink" title="一、实验要求"></a>一、实验要求</h3><p>自动识别图像中汽车的边界。</p>
 <p>要求：开发一种自动删除照相馆背景的算法。</p>
+<span id="more"></span>
+
+
+
 <h3 id="二、实验思路"><a href="#二、实验思路" class="headerlink" title="二、实验思路"></a>二、实验思路</h3><h4 id="一、解析问题"><a href="#一、解析问题" class="headerlink" title="一、解析问题"></a>一、解析问题</h4><p>​		什么是图像分割问题呢？ 简单的来讲就是给一张图像，检测是用框出框出物体，而图像分割分出一个物体的准确轮廓。也这样考虑，给出一张图像 Ｉ，这个问题就是求一个函数，从I映射到Mask。所以这里kaggle的比赛名称也叫做 ImageMasking Challenge 。</p>
 <h4 id="二、解决问题"><a href="#二、解决问题" class="headerlink" title="二、解决问题"></a>二、解决问题</h4><p>​		看了一下kaggle网站上对这个问题的解决方式，发现大部分都是使用unet解决，使用CNN的效果都很差，其余网络的提及也很少。UNET相比于CNN更适用于图像分割，因为它的编码-解码结构和跳跃连接机制使得网络能够同时学习到全局信息和局部细节，并且能够利用不同层次的特征进行语义信息传递，提高分割准确性。</p>
 <p>​	   <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1505.04597v1">U-NET原论文地址</a>U-net是一个用于医学图像分割的全卷积神经网络。目前很多神经网络的输出结果都是最终的分类类别标签，但对医学影像的处理，医务人员除了想要知道图像的类别以外，更想知道的是图像中各种组织的位置分布，而U-net就可以实现图片像素的定位，该网络对图像中的每一个像素点进行分类，最后输出的是根据像素点的类别而分割好的图像。</p>
-<h4 id="三、U-net结构"><a href="#三、U-net结构" class="headerlink" title="三、U-net结构"></a>三、U-net结构</h4><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/%5Cimages%5Cpost-image%5Ckaggle-masking-report%5Cimage-20240524162510686.png" alt="image-20240524162510686"></p>
+<h4 id="三、U-net结构"><a href="#三、U-net结构" class="headerlink" title="三、U-net结构"></a>三、U-net结构</h4><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/kaggle-masking-report/image-20240524162510686.png" alt="image-20240524162510686"></p>
 <p>​	<strong>编码器部分负责对输入图像进行多次下采样，以提取图像的抽象特征。常用的下采样方法是使用卷积层和池化层，逐渐减小特征图的尺寸同时增加通道数。这样可以帮助网络学习到更高级别的语义信息，并减小特征图的空间维度。</strong> </p>
 <ul>
 <li>​	该U-net网络一共有四层，分别对图片进行了4次下采样和4次上采样。左侧为编码器进行下采样的过程，输入的是一张572×572×1的图片，然后经过<strong>64</strong>个3×3的卷积核进行卷积，再通过ReLU函数后得到<strong>64个570×570×1的特征通道</strong>。然后把这570×570×64的结果再经过64个3×3的卷积核进行卷积，同样通过ReLU函数后得到64个568×568×1的特征提取结果，这就是第一层的处理结果。</li>
@@ -261,22 +271,22 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">model.load_weights(filepath=<span class="string">&#x27;weights/best_weights.hdf5&#x27;</span>)  <span class="comment"># 加载预训练模型权重</span></span><br><span class="line"><span class="keyword">for</span> start <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(ids_test), batch_size)):</span><br><span class="line">    x_batch = []  <span class="comment"># 初始化空列表，用于存储批量输入图像</span></span><br><span class="line">    end = <span class="built_in">min</span>(start + batch_size, <span class="built_in">len</span>(ids_test))  <span class="comment"># 确定当前批次的结束索引</span></span><br><span class="line">    ids_test_batch = ids_test[start:end]  <span class="comment"># 获取测试ID的批次</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> ids_test_batch.values:</span><br><span class="line">        img = cv2.imread(<span class="string">&#x27;input/test/&#123;&#125;.jpg&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">id</span>))  <span class="comment"># 读取输入的测试图像</span></span><br><span class="line">        img = cv2.resize(img, (input_size, input_size))  <span class="comment"># 调整图像大小以匹配模型的输入尺寸</span></span><br><span class="line">        x_batch.append(img)  <span class="comment"># 将预处理后的图像添加到批次列表中</span></span><br><span class="line">    x_batch = np.array(x_batch, np.float32) / <span class="number">255</span>  <span class="comment"># 将图像批次规范化</span></span><br><span class="line">    preds = model.predict_on_batch(x_batch)  <span class="comment"># 对图像批次进行预测</span></span><br><span class="line">    preds = np.squeeze(preds, axis=<span class="number">3</span>)  <span class="comment"># 从预测结果中移除冗余的维度</span></span><br><span class="line">    <span class="keyword">for</span> i, pred <span class="keyword">in</span> <span class="built_in">enumerate</span>(preds):</span><br><span class="line">        prob = cv2.resize(pred, (orig_width, orig_height))  <span class="comment"># 调整预测掩膜的大小以匹配原始图像尺寸</span></span><br><span class="line">        mask = prob &gt; threshold  <span class="comment"># 基于概率阈值创建二值掩膜</span></span><br><span class="line">        img = cv2.imread(<span class="string">&#x27;input/test/&#123;&#125;.jpg&#x27;</span>.<span class="built_in">format</span>(ids_test[start + i]))  <span class="comment"># 读取原始的测试图像</span></span><br><span class="line">        img = cv2.resize(img, (orig_width, orig_height))  <span class="comment"># 调整原始图像的大小以匹配掩膜大小</span></span><br><span class="line">        img[~mask] = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]  <span class="comment"># 将掩膜应用到原始图像上</span></span><br><span class="line">        cv2.imwrite(<span class="string">&#x27;output/&#123;&#125;.jpg&#x27;</span>.<span class="built_in">format</span>(ids_test[start + i]), img)  <span class="comment"># 将掩膜图像保存到输出文件夹中</span></span><br><span class="line">        rle = run_length_encode(mask)  <span class="comment"># 将掩膜编码为Run-Length格式</span></span><br><span class="line">        rles.append(rle)  <span class="comment"># 将编码后的掩膜添加到RLE列表中</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="四、训练过程"><a href="#四、训练过程" class="headerlink" title="四、训练过程"></a>四、训练过程</h3><p>​	直接在本地运行代码，没有使用kaggle的服务器，所以条件限制就只训练了五轮。加载模型之后，开始每一轮的训练，由于kaggle的训练集过于大，所以每一轮都要花费较多时间和资源。</p>
-<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/%5Cimages%5Cpost-image%5Ckaggle-masking-report%5Cimage-20240516200309746.png" alt="image-20240516200309746"></p>
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/kaggle-masking-report/image-20240516200309746.png" alt="image-20240516200309746"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Epoch 1/5</span><br><span class="line">255/255 - 2536s - loss: 0.1780 - dice_coeff: 0.8944 - val_loss: 1.7487 - val_dice_coeff: 0.0485 - lr: 1.0000e-04 - 2536s/epoch - 10s/step</span><br><span class="line">Epoch 2/5</span><br><span class="line">255/255 - 2478s - loss: 0.0763 - dice_coeff: 0.9548 - val_loss: 0.0859 - val_dice_coeff: 0.9512 - lr: 1.0000e-04 - 2478s/epoch - 10s/step</span><br><span class="line">Epoch 3/5</span><br><span class="line">255/255 - 2485s - loss: 0.0517 - dice_coeff: 0.9707 - val_loss: 0.0404 - val_dice_coeff: 0.9770 - lr: 1.0000e-04 - 2485s/epoch - 10s/step</span><br><span class="line">Epoch 4/5</span><br><span class="line">255/255 - 2497s - loss: 0.0409 - dice_coeff: 0.9778 - val_loss: 0.0815 - val_dice_coeff: 0.9556 - lr: 1.0000e-04 - 2497s/epoch - 10s/step</span><br><span class="line">Epoch 5/5</span><br><span class="line">255/255 - 2479s - loss: 0.0353 - dice_coeff: 0.9813 - val_loss: 0.0298 - val_dice_coeff: 0.9844 - lr: 1.0000e-04 - 2479s/epoch - 10s/step</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>训练过程输出损失值变化和预测准确度</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="\images\post-image\kaggle-masking-report\image-20240525134433622.png" alt="image-20240525134433622" style="zoom:67%;" />
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525134433622.png" alt="image-20240525134433622" style="zoom:67%;" />
 
 <p>可以看到随着训练伦次的不断增多，训练集合和验证集的损失值都在降低，而由于训练一轮之后再根据验证集损失值调整参数，所以验证集初始化的损失值会比训练集低很多。</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="\images\post-image\kaggle-masking-report\image-20240525134453902.png" alt="image-20240525134453902" style="zoom:67%;" />
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525134453902.png" alt="image-20240525134453902" style="zoom:67%;" />
 
 <p>而随着训练伦次不断增多，模型预测的准确度也在上升，DICE coefficient是模型准确度的含义，越接近1说明预测的准确度也越高。也可以看到训练前期模型快速收敛，后期模型参数变化，损失值下降梯度都有减缓。</p>
 <h3 id="五、输出图片"><a href="#五、输出图片" class="headerlink" title="五、输出图片"></a>五、输出图片</h3><p>原本kaggle给的预测图片很多，而课程实验中老师做了删减，只保留了40张需要删除背景的图片，于是在上述过程中，真正模型预测的时候代码运行很快。</p>
 <p>并且kaggle提交的是掩码的csv文件，csv文件中是掩码经过浮点编码之后保存的数值，不具有可读性，虽然最终的评价指标还是参考损失值，准确度等等，但是为了让算法实现可用性，就修改了代码，将生成的csv中的模型预测掩码作用于原本的输入图像中。</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="\images\post-image\kaggle-masking-report\image-20240525135327471.png" alt="image-20240525135327471" style="zoom:67%;" />
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525135327471.png" alt="image-20240525135327471" style="zoom:67%;" />
 
 <p>原始图像</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="\images\post-image\kaggle-masking-report\image-20240525135350825.png" alt="image-20240525135350825" style="zoom:67%;" />
+<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525135350825.png" alt="image-20240525135350825" style="zoom:67%;" />
 
 <p>掩码遮蔽图像</p>
 <p>可以看到仅仅训练5轮的Unet模型也能很好的将汽车图片中的照相馆背景删除。Unet模型对于背景和目标物的特征提取能力真的很强。</p>
@@ -301,12 +311,24 @@
     
     <div class="post_tags">
       
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/UNET/" class="tag">UNET</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/KAGGLE/" class="tag">KAGGLE</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="tag">图像分割</a>
+      
+        <i class="fas fa-tag"></i> <a href="/gina511.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="tag">计算机视觉</a>
+      
     </div>
     <div class="post-nav">
       
+        <div class="post-nav-prev post-nav-item">
+            <a href="/gina511.github.io/2024/04/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%86%B3%E7%AD%96%E6%A0%91/" >基于ID3算法和后剪枝的决策树实验<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
       
         <div class="post-nav-next post-nav-item">
-            <a href="/gina511.github.io/2024/04/23/%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/" >计算机视觉边界处理论文阅读记录（COB+HED)<i class="fa fa-chevron-right"></i></a>
+            <a href="/gina511.github.io/2024/04/12/gpt%E8%B0%83%E7%94%A8/" >NLP接口调用记录<i class="fa fa-chevron-right"></i></a>
         </div>
       
     </div>
