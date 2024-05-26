@@ -275,19 +275,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Epoch 1/5</span><br><span class="line">255/255 - 2536s - loss: 0.1780 - dice_coeff: 0.8944 - val_loss: 1.7487 - val_dice_coeff: 0.0485 - lr: 1.0000e-04 - 2536s/epoch - 10s/step</span><br><span class="line">Epoch 2/5</span><br><span class="line">255/255 - 2478s - loss: 0.0763 - dice_coeff: 0.9548 - val_loss: 0.0859 - val_dice_coeff: 0.9512 - lr: 1.0000e-04 - 2478s/epoch - 10s/step</span><br><span class="line">Epoch 3/5</span><br><span class="line">255/255 - 2485s - loss: 0.0517 - dice_coeff: 0.9707 - val_loss: 0.0404 - val_dice_coeff: 0.9770 - lr: 1.0000e-04 - 2485s/epoch - 10s/step</span><br><span class="line">Epoch 4/5</span><br><span class="line">255/255 - 2497s - loss: 0.0409 - dice_coeff: 0.9778 - val_loss: 0.0815 - val_dice_coeff: 0.9556 - lr: 1.0000e-04 - 2497s/epoch - 10s/step</span><br><span class="line">Epoch 5/5</span><br><span class="line">255/255 - 2479s - loss: 0.0353 - dice_coeff: 0.9813 - val_loss: 0.0298 - val_dice_coeff: 0.9844 - lr: 1.0000e-04 - 2479s/epoch - 10s/step</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>训练过程输出损失值变化和预测准确度</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525134433622.png" alt="image-20240525134433622" style="zoom:67%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/kaggle-masking-report/image-20240525134433622.png" alt="image-20240524162510686"></p>
 <p>可以看到随着训练伦次的不断增多，训练集合和验证集的损失值都在降低，而由于训练一轮之后再根据验证集损失值调整参数，所以验证集初始化的损失值会比训练集低很多。</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525134453902.png" alt="image-20240525134453902" style="zoom:67%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/kaggle-masking-report/image-20240525134453902.png" alt="image-20240524162510686"></p>
 <p>而随着训练伦次不断增多，模型预测的准确度也在上升，DICE coefficient是模型准确度的含义，越接近1说明预测的准确度也越高。也可以看到训练前期模型快速收敛，后期模型参数变化，损失值下降梯度都有减缓。</p>
 <h3 id="五、输出图片"><a href="#五、输出图片" class="headerlink" title="五、输出图片"></a>五、输出图片</h3><p>原本kaggle给的预测图片很多，而课程实验中老师做了删减，只保留了40张需要删除背景的图片，于是在上述过程中，真正模型预测的时候代码运行很快。</p>
 <p>并且kaggle提交的是掩码的csv文件，csv文件中是掩码经过浮点编码之后保存的数值，不具有可读性，虽然最终的评价指标还是参考损失值，准确度等等，但是为了让算法实现可用性，就修改了代码，将生成的csv中的模型预测掩码作用于原本的输入图像中。</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525135327471.png" alt="image-20240525135327471" style="zoom:67%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/kaggle-masking-report/image-20240525135327471.png" alt="image-20240524162510686"></p>
 <p>原始图像</p>
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/kaggle-masking-report/image-20240525135350825.png" alt="image-20240525135350825" style="zoom:67%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/kaggle-masking-report/image-20240525135350825.png" alt="image-20240524162510686"></p>
 <p>掩码遮蔽图像</p>
 <p>可以看到仅仅训练5轮的Unet模型也能很好的将汽车图片中的照相馆背景删除。Unet模型对于背景和目标物的特征提取能力真的很强。</p>
 <h3 id="六、实验收获"><a href="#六、实验收获" class="headerlink" title="六、实验收获"></a>六、实验收获</h3><p>之前的讨论课文献阅读中经常提到Unet这个网络结构，但是一直对这个的了解并不深入，完成kaggle的实验之后对Unet的原理和实现的过程了解更加深入了，并且对于keras这个深度学习框架的使用了解也更加深入。并且上课老师也一直提到图像增强的方式，完成kaggle实验的时候参考了很多网上的代码，发现了很多图像增强的方法，包括平移，旋转，缩放，翻转以及它们的具体实现，写代码的能力也up了。</p>
