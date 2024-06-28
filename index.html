@@ -184,6 +184,52 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
+            <a href="/gina511.github.io/2024/06/28/%E7%AE%97%E6%B3%95/">算法记录</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="Created 2024.06.28"><i class="far fa-calendar-alt"></i> 2024.06.28</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="Updated 2024.06.28"><i class="far fa-calendar-check"></i> 2024.06.28</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/gina511.github.io/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">134 words</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">1 min</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">Merge</span><span class="params">(ListNode* pHead1, ListNode* pHead2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead1 == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> pHead2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pHead2 == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> pHead1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pHead1-&gt;val &lt;= pHead2-&gt;val)&#123;</span><br><span class="line">        pHead1-&gt;next = <span class="built_in">Merge</span>(pHead1-&gt;next, pHead2);</span><br><span class="line">        <span class="keyword">return</span> pHead1;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        pHead2-&gt;next = <span class="built_in">Merge</span>(pHead1, pHead2-&gt;next);</span><br><span class="line">        <span class="keyword">return</span> pHead2;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>链表递归，重排两个有序链表。</strong></p>
+<p>思路：若某个链表为空，直接返回另一个链表；若不为空，比较两个链表大小，存储较小值的链表的下一个节点为其下一个节点与另一个链表头部的最小值存储节点。</p>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
             <a href="/gina511.github.io/2024/05/28/ccf%E7%AE%97%E6%B3%95/">算法复习（C++）</a>
           </div>
           <div class="post-meta">
