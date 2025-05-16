@@ -202,7 +202,7 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">251 words</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">270 words</span>
            
         
           <i class="far fa-clock"></i> <span class="post-count">1 min</span>
@@ -216,18 +216,14 @@
   <div class="content">
         <div><h1 id="CLIP"><a href="#CLIP" class="headerlink" title="CLIP"></a>CLIP</h1><span id="more"></span>
 
-<img src= "/gina511.github.io/img/loading.gif" data-src="/images/post-image/clip/cbe25e2fbf21daab53f116b2571f66f.png" alt="img" style="zoom:150%;" />
-
+<p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/clip/cbe25e2fbf21daab53f116b2571f66f.png" alt="image-20250516090029870"></p>
 <h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><ul>
-<li><p>MS-COCO                             约100000张照片 高质量</p>
-</li>
-<li><p>Visual Genome                    约100000张照片 高质量</p>
-</li>
-<li><p>YFCC100M                            约1亿张照片 ——&gt; 1500万张</p>
-</li>
-<li><p>WIT                                        自己搭建，网络爬取图片-文字对，约4亿个</p>
-</li>
+<li>MS-COCO                             约100000张照片 高质量</li>
+<li>Visual Genome                    约100000张照片 高质量</li>
+<li>YFCC100M                            约1亿张照片 ——&gt; 1500万张</li>
+<li>WIT                                        自己搭建，网络爬取图片-文字对，约4亿个</li>
 </ul>
+<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1ugU9Phaq7CkO9la5HyOh9TNSt1LA6O_6">colab clip示例代码【facebook GitHub】</a></p>
 <h3 id="图像特征提取"><a href="#图像特征提取" class="headerlink" title="图像特征提取"></a>图像特征提取</h3><h4 id="RESNET"><a href="#RESNET" class="headerlink" title="RESNET"></a>RESNET</h4><p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/clip/1d14e4a9aeec77f8e83bb16670ef99f.png" alt="image-20250516090029870"></p>
 <p>​            原图                                                                     残差                                                               目标图</p>
 <p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/clip/688b7b54a948608ca4c5ecd12082ece.png" alt="image-20250516090433665"></p>
@@ -235,8 +231,12 @@
 <p><img src= "/gina511.github.io/img/loading.gif" data-src="/gina511.github.io/images/post-image/clip/86305e04ad398550755ee5990fffc08.png" alt="image-20250516090714851"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ResidualBlock</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, out_channels, stride=<span class="number">1</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(ResidualBlock, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">3</span>, stride=stride, padding=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.bn1 = nn.BatchNorm2d(out_channels)</span><br><span class="line">        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.bn2 = nn.BatchNorm2d(out_channels)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果输入和输出的通道数不一致，或者步长不为1，需要调整输入维度</span></span><br><span class="line">        self.shortcut = nn.Sequential()</span><br><span class="line">        <span class="keyword">if</span> in_channels!= out_channels <span class="keyword">or</span> stride!= <span class="number">1</span>:</span><br><span class="line">            self.shortcut = nn.Sequential(</span><br><span class="line">                nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">1</span>, stride=stride, bias=<span class="literal">False</span>),</span><br><span class="line">                nn.BatchNorm2d(out_channels)</span><br><span class="line">            )</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        residual = x  <span class="comment"># 保存原始输入</span></span><br><span class="line">        out = self.conv1(x)</span><br><span class="line">        out = self.bn1(out)</span><br><span class="line">        out = F.relu(out)</span><br><span class="line">        out = self.conv2(out)</span><br><span class="line">        out = self.bn2(out)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将原始输入通过shortcut连接，并与输出相加</span></span><br><span class="line">        shortcut = self.shortcut(residual)</span><br><span class="line">        out += shortcut</span><br><span class="line">        out = F.relu(out)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure>
 
+
+
+<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1Bjj3k6NHP62XvQsG3yIWLaBetxDIGd9v">resnet colab示例代码</a></p>
 <h4 id="VIT"><a href="#VIT" class="headerlink" title="VIT"></a>VIT</h4><p><img src= "/gina511.github.io/img/loading.gif" data-src="https://pic1.zhimg.com/70/v2-4a85c71b10cf52a1501c56c9298a152e_1440w.image?source=172ae18b&biz_tag=Post" alt="轻松理解ViT(Vision Transformer)原理及源码"></p>
 <p>文本特征</p>
+<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1A6gBKTgD90UVt1pekzOkmZpLPcIuB6Mr">VIT示例代码</a></p>
 </div>
         
   </div>
